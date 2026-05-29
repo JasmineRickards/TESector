@@ -6,6 +6,7 @@ using Content.Shared.Audio;
 using Content.Shared.Database;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Parallax.Biomes;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Stacks;
@@ -41,6 +42,18 @@ public sealed class FloorTileSystem : EntitySystem
 
     private static readonly Vector2 CheckRange = new(1f, 1f);
 
+    private static readonly HashSet<string> PlanetFloors = new(StringComparer.Ordinal)
+    {
+        "FloorPlanetDirt",
+        "FloorDesert",
+        "FloorLowDesert",
+        "FloorPlanetGrass",
+        "FloorBasalt",
+        "FloorSnow",
+        "FloorIce",
+        "FloorSnowDug",
+    };
+
     public override void Initialize()
     {
         base.Initialize();
@@ -59,7 +72,7 @@ public sealed class FloorTileSystem : EntitySystem
             return;
 
         // this looks a bit sussy but it might be because it needs to be able to place off of grids and expand them
-        var location = args.ClickLocation.AlignWithClosestGridTile();
+        var location = AlignWithClosestGridTileExcludePlanet(args.ClickLocation);
         var locationMap = _transform.ToMapCoordinates(location);
         if (locationMap.MapId == MapId.Nullspace)
             return;
@@ -144,6 +157,18 @@ public sealed class FloorTileSystem : EntitySystem
 
                 var baseTurf = (ContentTileDefinition) _tileDefinitionManager[tile.Tile.TypeId];
 
+                // Allow creating/expanding grids out of lattices on planets
+                if (currentTileDefinition.ID == "Lattice" && PlanetFloors.Contains(baseTurf.ID))
+                {
+                    if (!_stackSystem.Use(uid, 1, stack))
+                        continue;
+                    if (_netManager.IsClient)
+                        return;
+                    CreateGrid(component, locationMap, args.User);
+                    args.Handled = true;
+                    return;
+                }
+
                 if (CanPlaceOn(currentTileDefinition, baseTurf.ID))
                 {
                     if (!_stackSystem.Use(uid, 1, stack))
@@ -158,16 +183,10 @@ public sealed class FloorTileSystem : EntitySystem
             {
                 if (!_stackSystem.Use(uid, 1, stack))
                     continue;
-
-                args.Handled = true;
                 if (_netManager.IsClient)
                     return;
-
-                var grid = _mapManager.CreateGridEntity(locationMap.MapId);
-                var gridXform = Transform(grid);
-                _transform.SetWorldPosition((grid, gridXform), locationMap.Position);
-                location = new EntityCoordinates(grid, Vector2.Zero);
-                PlaceAt(args.User, grid, grid.Comp, location, _tileDefinitionManager[component.OutputTiles[0]].TileId, component.PlaceTileSound, grid.Comp.TileSize / 2f);
+                CreateGrid(component, locationMap, args.User);
+                args.Handled = true;
                 return;
             }
         }
@@ -206,6 +225,17 @@ public sealed class FloorTileSystem : EntitySystem
         _audio.PlayPredicted(placeSound, location, user);
     }
 
+    private void CreateGrid(FloorTileComponent component, MapCoordinates locationMap, EntityUid user)
+    {
+        if (component.OutputTiles == null)
+            return;
+        var grid = _mapManager.CreateGridEntity(locationMap.MapId);
+        var gridXform = Transform(grid);
+        _transform.SetWorldPosition((grid, gridXform), locationMap.Position);
+        var location = new EntityCoordinates(grid, Vector2.Zero);
+        PlaceAt(user,grid, grid.Comp, location, _tileDefinitionManager[component.OutputTiles[0]].TileId, component.PlaceTileSound, grid.Comp.TileSize / 2f);
+    }
+
     public bool CanPlaceTile(EntityUid gridUid, MapGridComponent component, Vector2i gridIndices, [NotNullWhen(false)] out string? reason)
     {
         var ev = new FloorTileAttemptEvent(gridIndices);
@@ -220,4 +250,83 @@ public sealed class FloorTileSystem : EntitySystem
         reason = null;
         return true;
     }
+
+    /// <summary>
+    /// Used to make creating and expanding grids on a planet possible.
+    /// </summary>
+    /// <returns>Same as <see cref="AlignWithClosestGridTile"/>, but if the only found grid is a planet then it will just return the coordinates</returns>
+    private static EntityCoordinates AlignWithClosestGridTileExcludePlanet(EntityCoordinates coords, float searchBoxSize = 1.5f, IEntityManager? entityManager = null, IMapManager? mapManager = null)
+        {
+            IoCManager.Resolve(ref entityManager, ref mapManager);
+
+            var xform = entityManager.System<SharedTransformSystem>();
+            var gridId = xform.GetGrid(coords);
+            var mapSystem = entityManager.System<SharedMapSystem>();
+
+            if (entityManager.TryGetComponent<MapGridComponent>(gridId, out var mapGrid) && !entityManager.HasComponent<BiomeComponent>(gridId))
+            {
+                return mapSystem.GridTileToLocal(gridId.Value, mapGrid, mapSystem.CoordinatesToTile(gridId.Value, mapGrid, coords));
+            }
+
+            var mapCoords = xform.ToMapCoordinates(coords);
+
+            if (mapManager.TryFindGridAt(mapCoords, out var gridUid, out mapGrid) && !entityManager.HasComponent<BiomeComponent>(gridUid))
+            {
+                return mapSystem.GridTileToLocal(gridUid, mapGrid, mapSystem.CoordinatesToTile(gridUid, mapGrid, coords));
+            }
+
+            // create a box around the cursor
+            var gridSearchBox = Box2.UnitCentered.Scale(searchBoxSize).Translated(mapCoords.Position);
+
+            // find grids in search box
+            var gridsInArea = new List<Entity<MapGridComponent>>();
+
+            mapManager.FindGridsIntersecting(mapCoords.MapId, gridSearchBox, ref gridsInArea);
+
+            // find closest grid intersecting our search box.
+            gridUid = EntityUid.Invalid;
+            MapGridComponent? closest = null;
+            var distance = float.PositiveInfinity;
+            var intersect = new Box2();
+            var xformQuery = entityManager.GetEntityQuery<TransformComponent>();
+
+            foreach (var grid in gridsInArea)
+            {
+                if (entityManager.HasComponent<BiomeComponent>(grid))
+                    continue;
+                var gridXform = xformQuery.GetComponent(grid.Owner);
+                // TODO: Use CollisionManager to get nearest edge.
+
+                // figure out closest intersect
+                var worldMatrix = xform.GetWorldMatrix(gridXform);
+                var gridIntersect = gridSearchBox.Intersect(worldMatrix.TransformBox(grid.Comp.LocalAABB));
+                var gridDist = (gridIntersect.Center - mapCoords.Position).LengthSquared();
+
+                if (gridDist >= distance)
+                    continue;
+
+                gridUid = grid.Owner;
+                distance = gridDist;
+                closest = grid;
+                intersect = gridIntersect;
+            }
+
+            if (closest != null) // stick to existing grid
+            {
+                // round to nearest cardinal dir
+                var normal = mapCoords.Position - intersect.Center;
+
+                // round coords to center of tile
+                var tileIndices = mapSystem.WorldToTile(gridUid, closest, intersect.Center);
+                var tileCenterWorld = mapSystem.GridTileToWorldPos(gridUid, closest, tileIndices);
+
+                // move mouse one tile out along normal
+                var newTilePos = tileCenterWorld + normal * closest.TileSize;
+
+                coords = new EntityCoordinates(gridUid, mapSystem.WorldToLocal(gridUid, closest, newTilePos));
+            }
+            //else free place
+
+            return coords;
+        }
 }
