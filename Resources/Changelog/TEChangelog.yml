@@ -11,3 +11,13 @@ Entries:
       message: TE Sector's chagelog tab is now correctly displayed!
   id: 2
   time: '2026-05-26T15:52:51.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Fix
+      message: >-
+        Lattice grids can now be built on planets instead of placing reinforced
+        floors.
+    - type: Remove
+      message: Most tiles can no longer be placed on planets.
+  id: 3
+  time: '2026-05-29T12:25:56.0000000+00:00'
