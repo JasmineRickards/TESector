@@ -145,6 +145,8 @@ public static class ShipSaveYamlSanitizer
         "BluespaceFlasher",
         "ClothingNullHarness",
         "ClothingNullSpaceTeleporter",
+        "GrenadeDePhase",
+        "BluespaceFlasherFlatpack"
     };
 
     // Entity-level exclusion by component signature.
