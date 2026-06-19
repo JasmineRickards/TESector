@@ -64,8 +64,8 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<string> ServerBanDefaultSeverity =
         CVarDef.Create("admin.server_ban_default_severity", "High", CVar.ARCHIVE | CVar.SERVER | CVar.REPLICATED);
-    
-    /// <summary>  
+
+    /// <summary>
     ///     Default severity for imprisonment # KS14
     /// </summary>
     public static readonly CVarDef<string> ImprisonmentDefaultSeverity =
@@ -175,7 +175,7 @@ public sealed partial class CCVars
     /// This is hub advert safe, in case that's a worry.
     /// </summary>
     public static readonly CVarDef<bool> AdminsCountInReportedPlayerCount =
-        CVarDef.Create("admin.admins_count_in_playercount", false, CVar.SERVERONLY);
+        CVarDef.Create("admin.admins_count_in_playercount", true, CVar.SERVERONLY);
 
     /// <summary>
     ///     Determine if custom rank names are used.
