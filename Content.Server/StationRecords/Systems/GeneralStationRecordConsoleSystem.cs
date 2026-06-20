@@ -93,6 +93,7 @@ public sealed class GeneralStationRecordConsoleSystem : EntitySystem
             if (_colcommJobs.TryGetColcommRegistry(out var colcomm)) // HardLight
             {
                 _colcommJobs.TryAdjustJobSlot(colcomm, msg.JobProto, msg.Amount, clamp: true);
+                _stationJobsSystem.TryAdjustJobSlot(station, msg.JobProto, msg.Amount, false, true);
                 _stationJobsSystem.UpdateJobsAvailable();
             }
 
