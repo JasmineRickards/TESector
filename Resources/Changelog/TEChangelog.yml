@@ -21,3 +21,9 @@ Entries:
       message: Most tiles can no longer be placed on planets.
   id: 3
   time: '2026-05-29T12:25:56.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Fix
+      message: Station records console now actually edits jobs slots.
+  id: 4
+  time: '2026-06-20T10:48:18.0000000+00:00'
