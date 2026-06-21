@@ -1,0 +1,12 @@
+- type: entity
+  parent: CadetIDCard
+  id: CheckpointGuardIDCard
+  name: Checkpoint Guard's ID card
+  components:
+  - type: PresetIdCard
+    job: CheckpointGuard
+  - type: Sprite
+    sprite: Objects/Misc/id_cards.rsi
+    layers:
+    - state: default
+    - state: idsecurityofficer
