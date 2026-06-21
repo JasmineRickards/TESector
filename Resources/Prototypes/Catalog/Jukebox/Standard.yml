@@ -29,12 +29,6 @@
     path: /Audio/Jukebox/drifting.ogg
 
 - type: jukebox
-  id: starlight
-  name: Qwertyquerty - Starlight
-  path:
-    path: /Audio/Jukebox/starlight.ogg
-
-- type: jukebox
   id: sunset
   name: PigeonBeans - Sunset
   path:
