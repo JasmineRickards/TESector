@@ -1,0 +1,19 @@
+- type: job
+  id: CheckpointGuard
+  name: job-name-checkpoint-guard
+  description: job-description-checkpoint-guard
+  playTimeTracker: JobCheckpointGuard
+  hideConsoleVisibility: true
+  icon: "JobIconSecurityOfficer"
+  canBeAntag: false
+  joinNotifyCrew: false
+  setPreference: false
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: MailDisabled
+    - type: SpecialSectorStationRecord
+      recordGeneration: NoRecord
+  accessGroups:
+  - GeneralAccess
+  - USSPHigh
