@@ -179,7 +179,7 @@
     path: /Audio/Jukebox/HumansAreSuchEasyPrey.ogg
 
 - type: jukebox
-  id: kings.ogg
+  id: kings
   name: Kings
   path:
     path: /Audio/Jukebox/Kings.ogg
