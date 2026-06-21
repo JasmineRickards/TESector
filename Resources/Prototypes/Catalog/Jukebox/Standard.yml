@@ -65,12 +65,6 @@
     path: /Audio/Jukebox/Acceptableinthe80s.ogg
 
 - type: jukebox
-  id: 5hours
-  name: 5 Hours
-  path:
-    path: /Audio/Jukebox/5hours.ogg
-
-- type: jukebox
   id: alchemy
   name: Alchemy
   path:
