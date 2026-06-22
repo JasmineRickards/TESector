@@ -256,7 +256,8 @@
   description: nf-adventure-description
   showInVote: true
   rules:
-    - Secret
+    - BasicStationEventScheduler
+    - SpaceTrafficControlFriendlyEventScheduler
     - NFAdventure
     - BasicRoundstartVariation
 #    - NFRoundstartVariation
