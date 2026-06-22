@@ -22,6 +22,7 @@ namespace Content.IntegrationTests.Tests.Chemistry
     solutions:
       beaker:
         maxVol: 50
+        canReact: false
         canMix: true";
 
         [Test]
@@ -50,22 +51,36 @@ namespace Content.IntegrationTests.Tests.Chemistry
                     beaker = entityManager.SpawnEntity("TestSolutionContainer", coordinates);
                     Assert.That(solutionContainerSystem
                         .TryGetSolution(beaker, "beaker", out solutionEnt, out solution));
+                    var idx = 0;
                     foreach (var (id, reactant) in reactionPrototype.Reactants)
                     {
 #pragma warning disable NUnit2045
+                        idx++;
+                        if (idx == reactionPrototype.Reactants.Count)
+                        {
+                            solutionContainerSystem.SetTemperature(solutionEnt.Value, reactionPrototype.MinimumTemperature);
+
+                            if(reactionPrototype.MixingCategories == null)
+                                solutionEnt.Value.Comp.Solution.CanReact = true;
+
+                            Assert.That(solutionContainerSystem
+                                .TryAddReagent(solutionEnt.Value, id, reactant.Amount, out var quantityLast));
+                            Assert.That(reactant.Amount, Is.EqualTo(quantityLast));
+                            break;
+                        }
+
                         Assert.That(solutionContainerSystem
                             .TryAddReagent(solutionEnt.Value, id, reactant.Amount, out var quantity));
                         Assert.That(reactant.Amount, Is.EqualTo(quantity));
 #pragma warning restore NUnit2045
                     }
 
-                    solutionContainerSystem.SetTemperature(solutionEnt.Value, reactionPrototype.MinimumTemperature);
-
                     if (reactionPrototype.MixingCategories != null)
                     {
                         var dummyEntity = entityManager.SpawnEntity(null, MapCoordinates.Nullspace);
                         var mixerComponent = entityManager.AddComponent<ReactionMixerComponent>(dummyEntity);
                         mixerComponent.ReactionTypes = reactionPrototype.MixingCategories;
+                        solutionEnt.Value.Comp.Solution.CanReact = true;
                         solutionContainerSystem.UpdateChemicals(solutionEnt.Value, true, mixerComponent);
                     }
                 });
