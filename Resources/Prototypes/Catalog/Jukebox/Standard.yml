@@ -29,12 +29,6 @@
     path: /Audio/Jukebox/drifting.ogg
 
 - type: jukebox
-  id: starlight
-  name: Qwertyquerty - Starlight
-  path:
-    path: /Audio/Jukebox/starlight.ogg
-
-- type: jukebox
   id: sunset
   name: PigeonBeans - Sunset
   path:
@@ -63,12 +57,6 @@
   name: Acceptable in the80s
   path:
     path: /Audio/Jukebox/Acceptableinthe80s.ogg
-
-- type: jukebox
-  id: 5hours
-  name: 5 Hours
-  path:
-    path: /Audio/Jukebox/5hours.ogg
 
 - type: jukebox
   id: alchemy
@@ -185,7 +173,7 @@
     path: /Audio/Jukebox/HumansAreSuchEasyPrey.ogg
 
 - type: jukebox
-  id: kings.ogg
+  id: kings
   name: Kings
   path:
     path: /Audio/Jukebox/Kings.ogg

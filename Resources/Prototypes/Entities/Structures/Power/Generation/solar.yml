@@ -136,7 +136,7 @@
   - type: PowerSupplier
     supplyRampTolerance: 500
     supplyRampRate: 500
-    maxSupply: 5500
+    supplyRate: 5500
   - type: NFSolarPanel # Frontier: SolarPanel<NFSolarPanel (grid-based tracking)
   - type: Damageable
     damageContainer: StructuralInorganic

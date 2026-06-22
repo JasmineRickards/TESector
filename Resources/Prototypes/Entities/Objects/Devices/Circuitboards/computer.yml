@@ -131,7 +131,7 @@
   - type: ComputerBoard
     prototype: ComputerLaws
   - type: ComputerTabletopBoard
-    prototype: ComputerTabletopLaws
+    prototype: ComputerTabletoplaws
   - type: Construction
     deconstructionTarget: null
     graph: ComputerCircuitBoard
