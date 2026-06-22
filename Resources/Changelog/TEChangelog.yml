@@ -33,3 +33,9 @@ Entries:
       message: Adventure game present has more possible events now.
   id: 5
   time: '2026-06-22T13:21:41.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Tweak
+      message: Mechs (like Ripley) are now saved when saving a shuttle!
+  id: 6
+  time: '2026-06-22T14:36:58.0000000+00:00'
