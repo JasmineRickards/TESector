@@ -2,8 +2,6 @@ name: Publish Changelog
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 10 * * *'
 
 jobs:
  publish_changelog:
