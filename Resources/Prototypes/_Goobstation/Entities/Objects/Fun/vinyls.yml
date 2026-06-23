@@ -81,9 +81,6 @@
       vinyl_4: *vinyl_slot
       vinyl_5: *vinyl_slot
       # Hardlight end
-  - type: Tag
-    tags:
-    - VinylSleeve
 
 # Hardlight start - Added a new base class to replace the changed one, with the regular prefill.
 - type: entity
