@@ -9,6 +9,7 @@ using Content.Server.Chat.Managers;
 using Content.Server.Connection;
 using Content.Server.Database;
 using Content.Server.Discord;
+using Content.Server.Discord.DiscordLink;
 using Content.Server.Discord.WebhookMessages;
 using Content.Server.EUI;
 using Content.Server.GhostKick;
@@ -85,6 +86,8 @@ namespace Content.Server.IoC
             IoCManager.Register<MiniAuthManager>(); //Frontier
             IoCManager.Register<DiscordAuthManager>(); //Floofstation
             IoCManager.Register<ServerIdentityService>();
+            IoCManager.Register<DiscordLink>();
+            IoCManager.Register<DiscordChatLink>();
         }
     }
 }
