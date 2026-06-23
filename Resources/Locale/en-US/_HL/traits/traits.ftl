@@ -79,13 +79,13 @@ pooltoy-name = Pool Toy!
 pooltoy-text = You're a living inflatable, whether by some weird mutation or by being a synthetic being. You are quite resillient to blunt and naturally insulated, but are extra susceptible to pierce and slash, and you are easily knocked about by sudden forces!
 
 big-name = Big
-big-text = You are noticeably larger than average.
+big-text = You are noticeably larger than average. Increases your crit threshold by 25.
 very-big-name = Very Big
-very-big-text = You are significantly larger than average.  This has brought you no benefits over merely being big except learning how to squeeze into tight spaces.
+very-big-text = You are significantly larger than average.  This has brought you no benefits over merely being big except learning how to squeeze into tight spaces. Increases your crit threshold by 35.
 small-name = Small
-small-text = You are noticeably smaller than average.
+small-text = You are noticeably smaller than average. Decreases your crit threshold by 25.
 tiny-name = Tiny
-tiny-text = You are substantially smaller than average.
+tiny-text = You are substantially smaller than average. Decreases your crit threshold by 40.
 
 big-trait-cannot-wield-ranged = You are too large to wield this weapon.
 small-trait-cannot-use-wield-required = You are too small to use { THE($item) }.
