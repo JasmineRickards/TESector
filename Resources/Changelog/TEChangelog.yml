@@ -59,3 +59,41 @@ Entries:
       message: Jobs are no longer locked behind time requirements!
   id: 9
   time: '2026-06-23T12:58:55.0000000+00:00'
+- author: Ported by evil-serenity
+  changes:
+    - type: Add
+      message: Plumbing (a lot of stuff) from Starlight is available to be played with!
+    - type: Add
+      message: 2 new accurate security variants of clothing can now be worn!
+    - type: Fix
+      message: >-
+        Some security gear that was still red (from before the palette change),
+        now has correct color palette.
+    - type: Add
+      message: >-
+        NullSpace Fixes, Stability Returns. Brighteye's abilities are now
+        balanced correctly.
+    - type: Tweak
+      message: >-
+        Security tools related to nullspace entities have been tweaked, check
+        uplink for more details.
+    - type: Add
+      message: Added back PhaseNoms, The Dark, ShadeGen.
+    - type: Add
+      message: >-
+        Phase-Barrier Cable, a new way to block nullspace movemnt, can now be
+        crafted in protolathe or be bought from sec kit.
+    - type: Fix
+      message: Shadegen not working correctly with items in containers.
+    - type: Remove
+      message: The ability for Brighteyes to be Revolutionary.
+    - type: Add
+      message: Added ten new jazz songs from Tim Kulig, with bespoke sleeve art.
+    - type: Tweak
+      message: Sleeves can now hold five disks instead of one, enjoy!
+    - type: Add
+      message: Sixteen more new vinyl tracks!
+    - type: Add
+      message: Portable vinyl player, the Grooveman! Find it at Cargo.
+  id: 10
+  time: '2026-06-24T02:39:29.0000000+00:00'
