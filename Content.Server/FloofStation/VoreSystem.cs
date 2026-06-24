@@ -36,6 +36,8 @@ using Content.Server.Power.Components;
 using Content.Shared.PowerCell;
 using Content.Server.Nutrition.EntitySystems;
 using Content.Shared.Mind.Components;
+using Content.Server._Starlight.NullSpace;
+using Content.Shared._Starlight.NullSpace;
 
 namespace Content.Server.FloofStation;
 
@@ -60,6 +62,7 @@ public sealed class VoreSystem : EntitySystem
     [Dependency] private readonly StandingStateSystem _standingState = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly FoodSystem _food = default!;
+    [Dependency] private readonly NullSpacePhaseSystem _phase = default!;
 
     public override void Initialize()
     {
@@ -202,12 +205,28 @@ public sealed class VoreSystem : EntitySystem
                         * _contests.StaminaContest(uid, target)
                         * (_standingState.IsDown(target) ? 0.5f : 1));
 
-        _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, length, new VoreDoAfterEvent(), uid, target: target)
+        if (HasComp<NullSpaceComponent>(uid))
         {
-            BreakOnMove = true,
-            BreakOnDamage = true,
-            RequireCanInteract = true
-        });
+            _popups.PopupEntity(Loc.GetString("vore-attempt-phasenom", ("prey", target)), target, PopupType.LargeCaution);
+
+            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, length, new VoreDoAfterEvent(), uid, target: target)
+            {
+                BreakOnMove = true,
+                BreakOnWeightlessMove = false,
+                RequireCanInteract = false
+            });
+        }
+        else
+        {
+            _popups.PopupEntity(Loc.GetString("vore-attempt-devour", ("entity", uid), ("prey", target)), uid, PopupType.LargeCaution);
+
+            _doAfterSystem.TryStartDoAfter(new DoAfterArgs(EntityManager, uid, length, new VoreDoAfterEvent(), uid, target: target)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                RequireCanInteract = true
+            });
+        }
     }
 
     private void OnDoAfter(EntityUid uid, VoreComponent component, VoreDoAfterEvent args)
@@ -226,6 +245,12 @@ public sealed class VoreSystem : EntitySystem
     {
         if (!Resolve(uid, ref component))
             return;
+
+        if (HasComp<NullSpaceComponent>(uid))
+        {
+            _transform.SetWorldPositionRotation(uid, _transform.GetWorldPositionRotation(target).WorldPosition, _transform.GetWorldPositionRotation(target).WorldRotation);
+            _phase.Phase(uid);
+        }
 
         var vored = EnsureComp<VoredComponent>(target);
         vored.Pred = uid;
