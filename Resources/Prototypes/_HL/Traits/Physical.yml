@@ -239,6 +239,8 @@
       - PlateletFactories
       - Hemophilia
       - UnnaturalRegen
+      - ShadekinRegeneration
+      - ExtremeShadekinRegeneration
   - !type:SpeciesRequirement
     inverted: true
     species:
@@ -279,6 +281,8 @@
       - PlateletFactories
       - NaturalRegen
       - Hemophilia
+      - ShadekinRegeneration
+      - ExtremeShadekinRegeneration
   - !type:SpeciesRequirement
     inverted: true
     species:
