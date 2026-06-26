@@ -5,7 +5,7 @@
     - id: NoosphericStorm
     - id: MundaneDischarge
     - id: NoosphericZap
-    - id: NoosphericFry
+#    - id: NoosphericFry # TE - commented out
     - id: PsionicCatGotYourTongue
     - id: MassMindSwap
     - id: GlimmerWispSpawn
