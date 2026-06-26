@@ -97,3 +97,9 @@ Entries:
       message: Portable vinyl player, the Grooveman! Find it at Cargo.
   id: 10
   time: '2026-06-24T02:39:29.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Tweak
+      message: Trait selection UI is now completely different!
+  id: 11
+  time: '2026-06-26T08:31:17.0000000+00:00'
