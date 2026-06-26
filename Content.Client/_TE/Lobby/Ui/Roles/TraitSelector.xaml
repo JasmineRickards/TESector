@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BoxContainer xmlns="https://spacestation14.io"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              Orientation="Horizontal">
+    <Control>
+        <Button Name="ToggleableButton" ToggleMode="true" StyleClasses="OpenBottom">
+            <BoxContainer Orientation="Horizontal">
+                <Label Name="CostLabel" MinWidth="30"/>
+                <Label Name="TitleLabel" Margin = "10, 0, 0, 0"/>
+            </BoxContainer>
+        </Button>
+    </Control>
+</BoxContainer>

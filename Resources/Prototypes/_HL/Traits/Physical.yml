@@ -4,8 +4,14 @@
   description: lead-footed-text
   category: Physical
   cost: 3
-  mutuallyExclusiveTraits:
-  - Leadfooted
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Leadfooted
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Leadfooted
+# End TE - remake trait selection UI
   components:
   - type: FTLKnockdownImmune
 
@@ -15,9 +21,17 @@
   description: inoculated-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  - Synth
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Synth
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -30,14 +44,28 @@
   description: insulated-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  mutuallyExclusiveTraits:
-  - Heatresistant
-  - Radproof
-  - SnakeEater
-  - Cryoresistant
-  - PoolToy
+# Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#  - Heatresistant
+#  - Radproof
+#  - SnakeEater
+#  - Cryoresistant
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Heatresistant
+      - Radproof
+      - SnakeEater
+      - Cryoresistant
+      - PoolToy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: Insulated
 
@@ -47,14 +75,28 @@
   description: heat-resistant-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  mutuallyExclusiveTraits:
-  - Insulated
-  - Radproof
-  - SnakeEater
-  - Cryoresistant
-  - PoolToy
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#  - Insulated
+#  - Radproof
+#  - SnakeEater
+#  - Cryoresistant
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Insulated
+      - Radproof
+      - SnakeEater
+      - Cryoresistant
+      - PoolToy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: FireproofBodyParts
   - type: DamageProtectionBuff
@@ -72,14 +114,28 @@
   description: radproof-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  mutuallyExclusiveTraits:
-  - Insulated
-  - Heatresistant
-  - SnakeEater
-  - Cryoresistant
-  - PoolToy
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#  - Insulated
+#  - Heatresistant
+#  - SnakeEater
+#  - Cryoresistant
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Insulated
+      - Heatresistant
+      - SnakeEater
+      - Cryoresistant
+      - PoolToy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+  # End TE - remake trait selection UI
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -94,14 +150,28 @@
   description: snake-eater-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  mutuallyExclusiveTraits:
-  - Insulated
-  - Heatresistant
-  - Radproof
-  - Cryoresistant
-  - PoolToy
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#  - Insulated
+#  - Heatresistant
+#  - Radproof
+#  - Cryoresistant
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Insulated
+      - Heatresistant
+      - Radproof
+      - Cryoresistant
+      - PoolToy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -116,14 +186,28 @@
   description: cryo-resistant-text
   category: Physical
   cost: 8
-  speciesBlacklist:
-  - IPC
-  mutuallyExclusiveTraits:
-  - Heatresistant
-  - Insulated
-  - SnakeEater
-  - Radproof
-  - PoolToy
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#  - Heatresistant
+#  - Insulated
+#  - SnakeEater
+#  - Radproof
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Heatresistant
+      - Insulated
+      - SnakeEater
+      - Radproof
+      - PoolToy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+  # End TE - remake trait selection UI
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -138,16 +222,29 @@
   description: natural-regen-text
   category: Physical
   cost: 6
-  speciesBlacklist:
-  - IPC
-  - Synth
   blacklist:
     components:
     - BorgChassis
-  mutuallyExclusiveTraits:
-  - PlateletFactories
-  - Hemophilia
-  - UnnaturalRegen
+    # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+#  mutuallyExclusiveTraits:
+#  - PlateletFactories
+#  - Hemophilia
+#  - UnnaturalRegen
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - PlateletFactories
+      - Hemophilia
+      - UnnaturalRegen
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+    - Synth
+  # End TE - remake trait selection UI
   components:
   - type: PassiveDamage
     allowedStates:
@@ -165,16 +262,29 @@
   description: unnatural-regen-text
   category: Physical
   cost: 8
-  speciesBlacklist:
-  - IPC
-  - Synth
   blacklist:
     components:
     - BorgChassis
-  mutuallyExclusiveTraits:
-  - PlateletFactories
-  - NaturalRegen
-  - Hemophilia
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+#  mutuallyExclusiveTraits:
+#  - PlateletFactories
+#  - NaturalRegen
+#  - Hemophilia
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - PlateletFactories
+      - NaturalRegen
+      - Hemophilia
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+    - Synth
+  # End TE - remake trait selection UI
   components:
   - type: PassiveDamage
     allowedStates:
@@ -193,12 +303,22 @@
   description: pooltoy-text
   category: Physical
   cost: 2
-  mutuallyExclusiveTraits:
-  - Heatresistant
-  - Insulated
-  - SnakeEater
-  - Radproof
-  - DermalArmor
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Heatresistant
+#  - Insulated
+#  - SnakeEater
+#  - Radproof
+#  - DermalArmor
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Heatresistant
+      - Insulated
+      - SnakeEater
+      - Radproof
+      - DermalArmor
+  # End TE - remake trait selection UI
   components:
   - type: Insulated
   - type: DamageProtectionBuff
@@ -224,9 +344,16 @@
   category: Physical
   cost: 3
   replaceComponents: true
-  mutuallyExclusiveTraits:
-  - Small
-  - Tiny
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Small
+#  - Tiny
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Small
+      - Tiny
+  # End TE - remake trait selection UI
   components:
   - type: SizeAttribute
     tall: true
@@ -265,9 +392,16 @@
   category: Physical
   cost: 3
   replaceComponents: true
-  mutuallyExclusiveTraits:
-  - Small
-  - Tiny
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Small
+#  - Tiny
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+    - Small
+    - Tiny
+  # End TE - remake trait selection UI
   components:
   - type: SizeAttribute
     tall: true
@@ -305,9 +439,16 @@
   description: small-text
   category: Physical
   cost: -1
-  mutuallyExclusiveTraits:
-  - Big
-  - Tiny
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Big
+#  - Tiny
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Big
+      - Tiny
+  # End TE - remake trait selection UI
   components:
   - type: SizeAttribute
     short: true
@@ -347,9 +488,16 @@
   description: tiny-text
   category: Physical
   cost: -3
-  mutuallyExclusiveTraits:
-  - Big
-  - Small
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Big
+#  - Small
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Big
+      - Small
+  # End TE - remake trait selection UI
   components:
   - type: SizeAttribute
     short: true
@@ -403,8 +551,14 @@
   description: trait-amputee-left-arm-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - ArmAmputeeR
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - ArmAmputeeR
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - ArmAmputeeR
+  # End TE - remake trait selection UI
   components:
   - type: Amputee
     removeBodyPart: Arm
@@ -416,8 +570,14 @@
   description: trait-amputee-right-arm-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - ArmAmputeeL
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - ArmAmputeeL
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - ArmAmputeeL
+  # End TE - remake trait selection UI
   components:
   - type: Amputee
     removeBodyPart: Arm
@@ -429,9 +589,17 @@
   description: trait-hardskin-desc
   category: Physical
   cost: -4
-  speciesBlacklist:
-  - IPC
-  - Synth
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+    - Synth
+  # End TE - remake trait selection UI
   components:
   - type: BlockInjection
     blockHypospray: true
@@ -444,10 +612,18 @@
   description: trait-amputee-left-leg-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - LegAmputeeR
-  - LegAmputeeBoth
-  - WheelchairBound
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - LegAmputeeR
+#  - LegAmputeeBoth
+#  - WheelchairBound
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LegAmputeeR
+      - LegAmputeeBoth
+      - WheelchairBound
+  # End TE - remake trait selection UI
   blacklist:
     components:
       - BorgChassis
@@ -464,10 +640,18 @@
   description: trait-amputee-right-leg-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - LegAmputeeL
-  - LegAmputeeBoth
-  - WheelchairBound
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - LegAmputeeL
+#  - LegAmputeeBoth
+#  - WheelchairBound
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LegAmputeeL
+      - LegAmputeeBoth
+      - WheelchairBound
+  # End TE - remake trait selection UI
   blacklist:
     components:
       - BorgChassis
@@ -484,10 +668,18 @@
   description: trait-amputee-both-legs-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - LegAmputeeL
-  - LegAmputeeR
-  - WheelchairBound
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - LegAmputeeL
+#  - LegAmputeeR
+#  - WheelchairBound
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LegAmputeeL
+      - LegAmputeeR
+      - WheelchairBound
+  # End TE - remake trait selection UI
   blacklist:
     components:
       - BorgChassis

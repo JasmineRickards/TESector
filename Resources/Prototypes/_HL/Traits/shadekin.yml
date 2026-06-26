@@ -5,11 +5,22 @@
   description: hl-trait-mild-light-sensitivity-desc
   category: Physical
   cost: -1
-  speciesBlacklist:
-  - Shadekin
-  mutuallyExclusiveTraits:
-  - LightSensitivity
-  - ExtremeLightSensitivity
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - LightSensitivity
+#  - ExtremeLightSensitivity
+#  speciesBlacklist:
+#  - Shadekin
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LightSensitivity
+      - ExtremeLightSensitivity
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Shadekin
+# End TE - remake trait selection UI
   components:
   - type: LightSensitivity
     burnThreshold: 4
@@ -22,9 +33,16 @@
   description: hl-trait-light-sensitivity-desc
   category: Physical
   cost: -2
-  mutuallyExclusiveTraits:
-  - MildLightSensitivity
-  - ExtremeLightSensitivity
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MildLightSensitivity
+#  - ExtremeLightSensitivity
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MildLightSensitivity
+      - ExtremeLightSensitivity
+  # End TE - remake trait selection UI
   components:
   - type: LightSensitivity
     burnThreshold: 3
@@ -37,9 +55,16 @@
   description: hl-trait-extreme-light-sensitivity-desc
   category: Physical
   cost: -5
-  mutuallyExclusiveTraits:
-  - MildLightSensitivity
-  - LightSensitivity
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MildLightSensitivity
+#  - LightSensitivity
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MildLightSensitivity
+      - LightSensitivity
+  # End TE - remake trait selection UI
   components:
   - type: LightSensitivity
     burnThreshold: 2
@@ -60,16 +85,29 @@
   whitelist:
     components:
     - Shadekin
-  mutuallyExclusiveTraits:
-  - ExtremeShadekinRegeneration
-  - PlateletFactories
-  - NaturalRegen
-  - UnnaturalRegen
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - ExtremeShadekinRegeneration
+#  - PlateletFactories
+#  - NaturalRegen
+#  - UnnaturalRegen
+#  requirements:
+#  - !type:TraitsRequirement
+#    traits:
+#    - LightSensitivity
+#    - ExtremeLightSensitivity
   requirements:
   - !type:TraitsRequirement
-    traits:
-    - LightSensitivity
-    - ExtremeLightSensitivity
+    requiredTraits:
+      - LightSensitivity
+      - MildLightSensitivity
+      - ExtremeLightSensitivity
+    excludedTraits:
+      - ExtremeShadekinRegeneration
+      - PlateletFactories
+      - NaturalRegen
+      - UnnaturalRegen
+# End TE - remake trait selection UI
   components:
   - type: ShadekinRegeneration
     healPerSecond: 0.18
@@ -94,16 +132,29 @@
   whitelist:
     components:
     - Shadekin
-  mutuallyExclusiveTraits:
-  - ShadekinRegeneration
-  - PlateletFactories
-  - LightSensitivity
-  - NaturalRegen
-  - UnnaturalRegen
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - ShadekinRegeneration
+#  - PlateletFactories
+#  - LightSensitivity
+#  - NaturalRegen
+#  - UnnaturalRegen
+#  requirements:
+#  - !type:TraitsRequirement
+#    traits:
+#    - ExtremeLightSensitivity
   requirements:
   - !type:TraitsRequirement
-    traits:
-    - ExtremeLightSensitivity
+    requiredTraits:
+      - ExtremeLightSensitivity
+    excludedTraits:
+      - ShadekinRegeneration
+      - PlateletFactories
+      - LightSensitivity
+      - NaturalRegen
+      - UnnaturalRegen
+  # End TE - remake trait selection UI
+
   components:
   - type: ShadekinRegeneration
     healPerSecond: 0.36

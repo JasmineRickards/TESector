@@ -3,9 +3,16 @@
   name: hl-trait-egglayer-fertile-name
   description: hl-trait-egglayer-fertile-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - EggLayer
-  - EggLayerInfertile
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - EggLayer
+#  - EggLayerInfertile
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - EggLayer
+      - EggLayerInfertile
+# End TE - remake trait selection UI
   components:
     - type: LewdEggLaying
       eggSpawn:
@@ -22,9 +29,16 @@
   name: hl-trait-egglayer-name
   description: hl-trait-egglayer-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - EggLayerFertile
-  - EggLayerInfertile
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - EggLayerFertile
+#  - EggLayerInfertile
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - EggLayerFertile
+      - EggLayerInfertile
+  # End TE - remake trait selection UI
   components:
     - type: LewdEggLaying
       eggSpawn:
@@ -41,9 +55,16 @@
   name: hl-trait-egglayer-infertile-name
   description: hl-trait-egglayer-infertile-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - EggLayerFertile
-  - EggLayer
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - EggLayerFertile
+#  - EggLayer
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - EggLayerFertile
+      - EggLayer
+  # End TE - remake trait selection UI
   components:
     - type: LewdEggLaying
       eggSpawn:

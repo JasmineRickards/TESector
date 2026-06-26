@@ -24,11 +24,20 @@
   name: trait-cum-cascade-name
   description: trait-cum-cascade-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - CumProducer
-  - CumFlood
-  - BluespaceBalls
-  - BarrelBalls
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - CumProducer
+#  - CumFlood
+#  - BluespaceBalls
+#  - BarrelBalls
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - CumProducer
+      - CumFlood
+      - BluespaceBalls
+      - BarrelBalls
+# End TE - remake trait selection UI
   components:
     - type: CumProducer
       maxVol: 100
@@ -40,11 +49,20 @@
   name: trait-cum-flood-name
   description: trait-cum-flood-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - CumProducer
-  - CumCascade
-  - BluespaceBalls
-  - BarrelBalls
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - CumProducer
+#  - CumCascade
+#  - BluespaceBalls
+#  - BarrelBalls
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - CumProducer
+      - CumCascade
+      - BluespaceBalls
+      - BarrelBalls
+  # End TE - remake trait selection UI
   components:
     - type: CumProducer
       maxVol: 250
@@ -56,11 +74,20 @@
   name: trait-bluespace-balls-name
   description: trait-bluespace-balls-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - CumProducer
-  - CumCascade
-  - CumFlood
-  - BarrelBalls
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - CumProducer
+#  - CumCascade
+#  - CumFlood
+#  - BarrelBalls
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - CumProducer
+      - CumCascade
+      - CumFlood
+      - BarrelBalls
+  # End TE - remake trait selection UI
   components:
     - type: CumProducer
       maxVol: 1000
@@ -72,11 +99,20 @@
   name: trait-barrel-balls-name
   description: trait-barrel-balls-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - CumProducer
-  - CumCascade
-  - CumFlood
-  - BluespaceBalls
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - CumProducer
+#  - CumCascade
+#  - CumFlood
+#  - BluespaceBalls
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - CumProducer
+      - CumCascade
+      - CumFlood
+      - BluespaceBalls
+  # End TE - remake trait selection UI
   components:
     - type: CumProducer
       maxVol: 15000
@@ -108,11 +144,20 @@
   name: trait-milk-producer-name
   description: trait-milk-producer-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - MilkCascade
-  - MilkFlood
-  - BluespaceBreasts
-  - BarrelBreasts
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MilkCascade
+#  - MilkFlood
+#  - BluespaceBreasts
+#  - BarrelBreasts
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MilkCascade
+      - MilkFlood
+      - BluespaceBreasts
+      - BarrelBreasts
+  # End TE - remake trait selection UI
   components:
     - type: MilkProducer
       maxVol: 50
@@ -124,11 +169,20 @@
   name: trait-milk-cascade-name
   description: trait-milk-cascade-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - MilkProducer
-  - MilkFlood
-  - BluespaceBreasts
-  - BarrelBreasts
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MilkProducer
+#  - MilkFlood
+#  - BluespaceBreasts
+#  - BarrelBreasts
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MilkProducer
+      - MilkFlood
+      - BluespaceBreasts
+      - BarrelBreasts
+  # End TE - remake trait selection UI
   components:
     - type: MilkProducer
       maxVol: 100
@@ -140,11 +194,20 @@
   name: trait-milk-flood-name
   description: trait-milk-flood-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - MilkProducer
-  - MilkCascade
-  - BluespaceBreasts
-  - BarrelBreasts
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MilkProducer
+#  - MilkCascade
+#  - BluespaceBreasts
+#  - BarrelBreasts
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MilkProducer
+      - MilkCascade
+      - BluespaceBreasts
+      - BarrelBreasts
+  # End TE - remake trait selection UI
   components:
     - type: MilkProducer
       maxVol: 250
@@ -156,11 +219,20 @@
   name: trait-bluespace-breasts-name
   description: trait-bluespace-breasts-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - MilkProducer
-  - MilkCascade
-  - MilkFlood
-  - BarrelBreasts
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MilkProducer
+#  - MilkCascade
+#  - MilkFlood
+#  - BarrelBreasts
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MilkProducer
+      - MilkCascade
+      - MilkFlood
+      - BarrelBreasts
+  # End TE - remake trait selection UI
   components:
     - type: MilkProducer
       maxVol: 1000
@@ -172,11 +244,20 @@
   name: trait-barrel-breasts-name
   description: trait-barrel-breasts-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - MilkProducer
-  - MilkCascade
-  - MilkFlood
-  - BluespaceBreasts
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - MilkProducer
+#  - MilkCascade
+#  - MilkFlood
+#  - BluespaceBreasts
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - MilkProducer
+      - MilkCascade
+      - MilkFlood
+      - BluespaceBreasts
+  # End TE - remake trait selection UI
   components:
     - type: MilkProducer
       maxVol: 15000

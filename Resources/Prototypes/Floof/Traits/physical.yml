@@ -4,10 +4,20 @@
   description: trait-description-Vampirism
   category: Physical
   cost: 4 # Whilst they can still eat everything this is literally only a positive trait.
-  speciesBlacklist:
+# Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  mutuallyExclusiveTraits:
+#    - LesserVampirism
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LesserVampirism
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
     - IPC
-  mutuallyExclusiveTraits:
-    - LesserVampirism
+# End TE - remake trait selection UI
   components:
     - type: Vampirism
       succDelay: 3
@@ -36,10 +46,20 @@
   description: trait-description-LesserVampirism
   category: Physical
   cost: 2
-  speciesBlacklist:
-    - IPC
-  mutuallyExclusiveTraits:
-    - Vampirism
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#    - IPC
+#  mutuallyExclusiveTraits:
+#    - Vampirism
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Vampirism
+  - !type:SpeciesRequirement
+      inverted: true
+      species:
+        - IPC
+  # End TE - remake trait selection UI
   components:
     - type: Vampirism
       succDelay: 3

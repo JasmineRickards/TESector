@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Text;
-using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Preferences;
 using Content.Shared.Traits;
 using JetBrains.Annotations;
@@ -17,8 +17,11 @@ namespace Content.Shared.Roles;
 [Serializable, NetSerializable]
 public sealed partial class TraitsRequirement : JobRequirement
 {
-    [DataField(required: true)]
-    public HashSet<ProtoId<TraitPrototype>> Traits = new();
+    [DataField]
+    public HashSet<ProtoId<TraitPrototype>> RequiredTraits = new();
+
+    [DataField]
+    public HashSet<ProtoId<TraitPrototype>> ExcludedTraits = new();
 
     public override bool Check(IEntityManager entManager,
         IPrototypeManager protoManager,
@@ -31,37 +34,59 @@ public sealed partial class TraitsRequirement : JobRequirement
         if (profile is null) //the profile could be null if the player is a ghost. In this case we don't need to block the role selection for ghostrole
             return true;
 
-        var sb = new StringBuilder();
-        sb.Append("[color=yellow]");
-        foreach (var t in Traits)
+        var requiredSb = new StringBuilder();
+        requiredSb.Append("[color=yellow]");
+        foreach (var t in RequiredTraits)
         {
-            sb.Append(Loc.GetString(protoManager.Index(t).Name) + " ");
+            var separator = RequiredTraits.Last() == t ? " " : ", ";
+            requiredSb.Append(Loc.GetString(protoManager.Index(t).Name) + separator);
         }
+        requiredSb.Append("[/color]");
 
-        sb.Append("[/color]");
-
-        if (!Inverted)
+        var excludedSb = new StringBuilder();
+        excludedSb.Append("[color=yellow]");
+        foreach (var t in ExcludedTraits)
         {
-            reason = FormattedMessage.FromMarkupPermissive($"{Loc.GetString("role-timer-whitelisted-traits")}\n{sb}");
-            //at least one of
-            foreach (var trait in Traits)
-            {
-                if (profile.TraitPreferences.Contains(trait))
-                    return true;
-            }
-            return false;
+            var separator = ExcludedTraits.Last() == t ? " " : ", ";
+            excludedSb.Append(Loc.GetString(protoManager.Index(t).Name) + separator);
+        }
+        excludedSb.Append("[/color]");
+
+        if (RequiredTraits.Count > 0 && ExcludedTraits.Count > 0)
+        {
+            reason = FormattedMessage.FromMarkupPermissive($"{Loc.GetString("role-timer-whitelisted-traits")}\n{requiredSb}\n{Loc.GetString("role-timer-blacklisted-traits")}\n{excludedSb}");
+        }
+        else if (RequiredTraits.Count > 0)
+        {
+            reason = FormattedMessage.FromMarkupPermissive($"{Loc.GetString("role-timer-whitelisted-traits")}\n{requiredSb}");
+        }
+        else if (ExcludedTraits.Count > 0)
+        {
+            reason = FormattedMessage.FromMarkupPermissive($"{Loc.GetString("role-timer-blacklisted-traits")}\n{excludedSb}");
         }
         else
         {
-            reason = FormattedMessage.FromMarkupPermissive($"{Loc.GetString("role-timer-blacklisted-traits")}\n{sb}");
-
-            foreach (var trait in Traits)
-            {
-                if (profile.TraitPreferences.Contains(trait))
-                    return false;
-            }
+            return true;
         }
 
-        return true;
+        var requirementsMet = false;
+
+        //at least one of
+        foreach (var trait in RequiredTraits)
+        {
+            if (profile.TraitPreferences.Contains(trait))
+                requirementsMet = true;
+        }
+
+        if(RequiredTraits.Count == 0)
+            requirementsMet = true;
+
+        foreach (var trait in ExcludedTraits)
+        {
+            if (profile.TraitPreferences.Contains(trait))
+                requirementsMet = false;
+        }
+
+        return requirementsMet;
     }
 }

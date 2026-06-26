@@ -4,7 +4,6 @@ using System.Numerics;
 using Content.Server.Administration.Managers;
 using Content.Server.Administration.Systems;
 using Content.Server.GameTicking.Events;
-using Content.Server.Ghost;
 using Content.Server.Spawners.Components;
 using Content.Server.Speech.Components;
 using Content.Server.Station.Components;
@@ -22,8 +21,10 @@ using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Utility;
-using Content.Server._Corvax.Respawn; // Frontier
-using Content.Shared._NF.Roles.Components; // Frontier
+using Content.Server._Corvax.Respawn;
+using Content.Server.Players.PlayTimeTracking; // Frontier
+using Content.Shared._NF.Roles.Components;
+using Content.Shared.Traits; // Frontier
 
 namespace Content.Server.GameTicking
 {
@@ -33,6 +34,8 @@ namespace Content.Server.GameTicking
         [Dependency] private readonly SharedJobSystem _jobs = default!;
         [Dependency] private readonly AdminSystem _admin = default!;
         [Dependency] private readonly RespawnSystem _respawn = default!; // Frontier
+        [Dependency] private readonly PlayTimeTrackingManager _playTimeManager = default!; // TE - remake trait selection UI
+        [Dependency] private readonly IEntityManager _entityManager = default!; // TE - remake trait selection UI
 
         public static readonly EntProtoId ObserverPrototypeName = new("MobObserver");
 
@@ -222,6 +225,42 @@ namespace Content.Server.GameTicking
                 return;
             }
 
+            // Start TE - remake trait selection UI
+            Dictionary<TraitCategoryPrototype, int> categoriesPoints = new();
+
+            foreach (var traitProtoId in character.TraitPreferences)
+            {
+                var traitProto = _prototypeManager.Index(traitProtoId);
+                if(!_prototypeManager.TryIndex(traitProto.Category, out var category))
+                    continue;
+
+                if (category.MaxTraitPoints > 0)
+                {
+                    if (categoriesPoints.ContainsKey(category))
+                        categoriesPoints[category] += traitProto.Cost;
+                    else
+                    {
+                        categoriesPoints.TryAdd(category, traitProto.Cost);
+                    }
+                }
+
+                if (!JobRequirements.TryRequirementsMet(traitProto.Requirements, _playTimeManager.GetPlayTimes(player), out var _, _entityManager, _prototypeManager, character))
+                {
+                    DoWhenCharacterDoesNotMeetTraitRestrictions(player);
+                    return;
+                }
+            }
+
+            foreach (var category in categoriesPoints.Keys)
+            {
+                if (categoriesPoints[category] > category.MaxTraitPoints)
+                {
+                    DoWhenCharacterDoesNotMeetTraitRestrictions(player);
+                    return;
+                }
+            }
+            // End TE - remake trait selection UI
+
             PlayerJoinGame(player, silent);
 
             var data = player.ContentData();
@@ -332,6 +371,27 @@ namespace Content.Server.GameTicking
                 character);
             RaiseLocalEvent(mob, aev, true);
         }
+
+        // Start TE - remake trait selection UI
+        /// <summary>
+        ///     Called by SpawnPlayer() when a player does not meet the restrictions on their character's traits.
+        ///     Should be called immediately before a `return` statement, to prevent the player from spawning.
+        /// </summary>
+        /// <param name="player">The player whose character doesn't meet the appropriate restrictions</param>
+        private void DoWhenCharacterDoesNotMeetTraitRestrictions(ICommonSession player)
+        {
+            if (!LobbyEnabled)
+            {
+                JoinAsObserver(player);
+            }
+
+            var evNoJobs = new NoJobsAvailableSpawningEvent(player); // Used by gamerules to wipe their antag slot, if they got one
+            RaiseLocalEvent(evNoJobs);
+
+            _chatManager.DispatchServerMessage(player,
+                Loc.GetString("game-ticker-player-restricted-traits-selected-when-joining"));
+        }
+        // End TE - remake trait selection UI
 
         public void Respawn(ICommonSession player)
         {

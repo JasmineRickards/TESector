@@ -16,9 +16,16 @@
   name: trait-aphrodesiacbite-name
   description: trait-aphrodesiacbite-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - AbilityPhilterexBite
-  - AbilityPomelustineBite
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - AbilityPhilterexBite
+#  - AbilityPomelustineBite
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - AbilityPhilterexBite
+      - AbilityPomelustineBite
+# End TE - remake trait selection UI
   cost: 0
   components:
   - type: AphrodesiacBite
@@ -28,9 +35,16 @@
   name: trait-philterexbite-name
   description: trait-philterexbite-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - AbilityAphrodesiacBite
-  - AbilityPomelustineBite
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - AbilityAphrodesiacBite
+#  - AbilityPomelustineBite
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - AbilityAphrodesiacBite
+      - AbilityPomelustineBite
+  # End TE - remake trait selection UI
   cost: 0
   components:
   - type: AphrodesiacBite
@@ -42,9 +56,16 @@
   name: trait-pomelustinebite-name
   description: trait-pomelustinebite-desc
   category: Physical
-  mutuallyExclusiveTraits:
-  - AbilityAphrodesiacBite
-  - AbilityPhilterexBite
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - AbilityAphrodesiacBite
+#  - AbilityPhilterexBite
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - AbilityAphrodesiacBite
+      - AbilityPhilterexBite
+  # End TE - remake trait selection UI
   cost: 0
   components:
   - type: AphrodesiacBite

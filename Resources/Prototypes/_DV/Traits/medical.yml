@@ -5,10 +5,19 @@
   # HardLight start
   category: Physical
   cost: -4
-  speciesBlacklist:
-  - IPC
-  - Synth
-  - Vox #Vox Froguli - now innate to Vox
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+#  - Vox #Vox Froguli - now innate to Vox
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Synth
+      - Vox #Vox Froguli - now innate to Vox
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -23,9 +32,17 @@
   # HardLight start
   category: Physical
   cost: -4
-  speciesBlacklist:
-  - IPC
-  - Synth
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Synth
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
