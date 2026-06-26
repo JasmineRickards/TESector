@@ -92,20 +92,32 @@ public sealed partial class TraitPrototype : IPrototype, IComparable<TraitProtot
     /// <summary>
     ///     List of traits that ca't be taken together with this one.
     /// </summary>
-    [DataField]
+    /// <remarks>
+    /// TE - remake trait selection UI - obsolete, do not use. Use <see cref="Requirements"/> with !<see cref="TraitsRequirement"/>
+    /// which has requiredTraits and excludedTraits datafields.
+    /// </remarks>
+    [Obsolete]
     public HashSet<ProtoId<TraitPrototype>> MutuallyExclusiveTraits { get; private set; } = new();
 
     /// <summary>
     ///     List of species that can't have this trait.
     /// </summary>
-    [DataField]
+    /// <remarks>
+    /// TE - remake trait selection UI - obsolete, do not use. Use <see cref="Requirements"/> with !<see cref="SpeciesRequirement"/>.
+    /// To get similar result fill species datafield and set inverted datafield to true in your trait prototype.
+    /// </remarks>
+    [Obsolete]
     public HashSet<ProtoId<SpeciesPrototype>> SpeciesBlacklist { get; private set; } = new();
 
     /// <summary>
     ///     Requirements for this trait to be selectable.
     /// </summary>
+    /// <remarks>
+    /// TE - Remake traits selection UI - replace <see cref="TraitPreferenceSelector"/> with <see cref="TraitSelector"/>
+    /// TraitSelectors will be disabled if the requirements are not met.
+    /// </remarks>
     [DataField]
-    public List<JobRequirement> Requirements { get; private set; } = new();
+    public HashSet<JobRequirement> Requirements { get; private set; } = new();
 
     /// <summary>
     ///     If this trait should replace the added components. Hardlight change.

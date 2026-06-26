@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Client._TE.Lobby.Ui;
 using Content.Client.Guidebook;
 using Content.Client.Humanoid;
 using Content.Client.Inventory;
@@ -242,6 +243,57 @@ public sealed class LobbyUIController : UIController, IOnStateEntered<LobbyState
 
         if (selected == null)
             return;
+
+        // Start TE - remake trait selection UI
+        var warnings = new Dictionary<string, string>();
+
+        Dictionary<TraitCategoryPrototype, int> categoriesPoints = new();
+
+        foreach (var traitProto in EditedProfile.TraitPreferences)
+        {
+            var trait = _prototypeManager.Index(traitProto);
+            if(!_prototypeManager.TryIndex(trait.Category, out var category))
+                continue;
+            if (category.MaxTraitPoints > 0)
+            {
+                if (categoriesPoints.ContainsKey(category))
+                    categoriesPoints[category] += trait.Cost;
+                else
+                {
+                    categoriesPoints.TryAdd(category, trait.Cost);
+                }
+            }
+
+            // if the saved profile will have unmet requirements, take note of it
+            if (!_requirements.CheckTraitRequirements(trait, EditedProfile, out var unmetRequirements))
+            {
+                warnings.Add(Loc.GetString(trait.Name), unmetRequirements.ToString());
+            }
+        }
+
+        foreach (var category in categoriesPoints.Keys)
+        {
+            if (categoriesPoints[category] > category.MaxTraitPoints)
+            {
+                warnings.Add(Loc.GetString("lobby-confirm-save-trait-points-problem"), Loc.GetString("lobby-confirm-save-trait-points-details", ("points", categoriesPoints[category])));
+            }
+        }
+
+        if (warnings.Count > 0)
+        {
+            var warningWindow = new TraitSaveWarning();
+            warningWindow.AddWarnings(warnings);
+            warningWindow.OpenCentered();
+
+            warningWindow.OnSaveButtonPressed += _ =>
+            {
+                _preferencesManager.UpdateCharacter(EditedProfile, EditedSlot.Value);
+                ReloadCharacterSetup();
+            };
+
+            return;
+        }
+        // End TE - remake trait selection UI
 
         _preferencesManager.UpdateCharacter(EditedProfile, EditedSlot.Value);
         ReloadCharacterSetup();

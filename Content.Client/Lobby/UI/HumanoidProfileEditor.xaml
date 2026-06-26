@@ -160,9 +160,12 @@
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical" Margin="10">
                     <!-- Traits -->
-                    <ScrollContainer VerticalExpand="True">
+                    <!-- start TE: Trait selection UI remake -->
+                    <VerticalTabContainer Name="TraitsTabs" VerticalExpand="True" HorizontalExpand="True" />
+                    <!--<ScrollContainer VerticalExpand="True">
                         <BoxContainer Name="TraitsList" Orientation="Vertical" />
-                    </ScrollContainer>
+                    </ScrollContainer>-->
+                    <!-- end TE: Trait selection UI remake -->
                 </BoxContainer>
                 <BoxContainer Orientation="Vertical" Margin="10">
                     <!-- Company -->

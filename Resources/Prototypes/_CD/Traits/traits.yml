@@ -4,9 +4,17 @@
   description: trait-synthetic-desc
   category: Physical
   cost: 3 # HardLight: It does actual stuff now
-  speciesBlacklist: # HardLight
-  - IPC
-  - Synth
+  # Start TE - remake trait selection UI
+#  speciesBlacklist: # HardLight
+#  - IPC
+#  - Synth
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Synth
+  # End TE - remake trait selection UI
   blacklist:
     components:
       - BorgChassis

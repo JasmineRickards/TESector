@@ -15,8 +15,14 @@
   description: trait-vigor-desc
   category: Physical
   cost: 6
-  mutuallyExclusiveTraits:
-  - Lethargy
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Lethargy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Lethargy
+# End TE - remake trait selection UI
   speciesBlacklist:
   - Oni
   - IPC
@@ -29,10 +35,21 @@
   description: trait-lethargy-desc
   category: Physical
   cost: -4
-  mutuallyExclusiveTraits:
-  - Vigor
-  speciesBlacklist:
-  - Felinid
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Vigor
+#  speciesBlacklist:
+#  - Felinid
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Vigor
+  - !type:SpeciesRequirement
+      inverted: true
+      species:
+        - Felinid
+  # End TE - remake trait selection UI
+
   blacklist:
     components:
     - BorgChassis
@@ -45,10 +62,20 @@
   description: trait-glass-jaw-desc
   category: Physical
   cost: -2
-  mutuallyExclusiveTraits:
-  - Tenacity
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Tenacity
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Tenacity
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: GlassJaw
 
@@ -58,11 +85,22 @@
   description: trait-tenacity-desc
   category: Physical
   cost: 1
-  mutuallyExclusiveTraits:
-  - GlassJaw
-  - OsteogenesisImperfecta
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - GlassJaw
+#  - OsteogenesisImperfecta
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - GlassJaw
+      - OsteogenesisImperfecta
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: Tenacity
 
@@ -72,11 +110,22 @@
   description: trait-will-to-live-desc
   category: Physical
   cost: 1
-  mutuallyExclusiveTraits:
-  - WillToDie
-  - Redshirt
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - WillToDie
+#  - Redshirt
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+    - WillToDie
+    - Redshirt
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -89,10 +138,20 @@
   description: trait-will-to-die-desc
   category: Physical
   cost: -1
-  mutuallyExclusiveTraits:
-  - WillToLive
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - WillToLive
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - WillToLive
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -128,10 +187,20 @@
   description: trait-osteogenesis-imperfecta-desc
   category: Physical
   cost: -6
-  mutuallyExclusiveTraits:
-  - Tenacity
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Tenacity
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Tenacity
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -192,10 +261,20 @@
   description: trait-feeble-desc
   category: Physical
   cost: -4
-  mutuallyExclusiveTraits:
-   - Steadfast
-  speciesBlacklist:
-   - Felinid
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#   - Steadfast
+#  speciesBlacklist:
+#   - Felinid
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Steadfast
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Felinid
+  # End TE - remake trait selection UI
   components:
     - type: SlowOnDamage
       speedModifierThresholds:
@@ -208,9 +287,17 @@
   description: trait-trap-avoider-desc
   category: Physical
   cost: 5
-  speciesBlacklist:
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#    - Felinid
+#    - Harpy
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
     - Felinid
     - Harpy
+  # End TE - remake trait selection UI
   components:
     - type: TrapAvoider
 
@@ -245,12 +332,24 @@
   description: trait-liquor-lifeline-desc
   category: Physical
   cost: 6
-  mutuallyExclusiveTraits:
-  - AlcoholTolerance
-  speciesBlacklist:
-  - IPC
-  - Dwarf
-  - Synth # HardLight
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - AlcoholTolerance
+#  speciesBlacklist:
+#  - IPC
+#  - Dwarf
+#  - Synth # HardLight
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - AlcoholTolerance
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+    - Dwarf
+    - Synth # HardLight
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -263,10 +362,20 @@
   description: trait-redshirt-desc
   category: Physical
   cost: -8
-  mutuallyExclusiveTraits:
-  - WillToLive
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - WillToLive
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - WillToLive
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -292,10 +401,20 @@
   description: trait-steadfast-desc
   category: Physical
   cost: 3
-  mutuallyExclusiveTraits:
-  - Feeble
-  speciesBlacklist:
-  - Felinid
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Feeble
+#  speciesBlacklist:
+#  - Felinid
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Feeble
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Felinid
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -311,8 +430,14 @@
   description: trait-dermal-armor-desc
   category: Physical
   cost: 6
-  mutuallyExclusiveTraits:
-  - PoolToy
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - PoolToy
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - PoolToy
+  # End TE - remake trait selection UI
   components:
   - type: DamageProtectionBuff
     modifiers:
@@ -351,12 +476,24 @@
   description: trait-alcohol-tolerance-desc
   category: Physical
   cost: 2
-  mutuallyExclusiveTraits:
-  - LightweightDrunk
-  - LiquorLifeline
-  speciesBlacklist:
-  - Dwarf
-  - IPC
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - LightweightDrunk
+#  - LiquorLifeline
+#  speciesBlacklist:
+#  - Dwarf
+#  - IPC
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LightweightDrunk
+      - LiquorLifeline
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Dwarf
+    - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -370,16 +507,32 @@
   description: trait-platelet-factories-desc
   category: Physical
   cost: 10
-  mutuallyExclusiveTraits:
-  - Hemophilia
-  - UnnaturalRegen
-  - NaturalRegen
-  - ShadekinRegeneration
-  - ExtremeShadekinRegeneration
-  speciesBlacklist:
-  - IPC
-  - Avali
-  - Synth # HardLight
+  # Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#  - Hemophilia
+#  - UnnaturalRegen
+#  - NaturalRegen
+#  - ShadekinRegeneration
+#  - ExtremeShadekinRegeneration
+#  speciesBlacklist:
+#  - IPC
+#  - Avali
+#  - Synth # HardLight
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - Hemophilia
+      - UnnaturalRegen
+      - NaturalRegen
+      - ShadekinRegeneration
+      - ExtremeShadekinRegeneration
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+    - Avali
+    - Synth # HardLight
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis

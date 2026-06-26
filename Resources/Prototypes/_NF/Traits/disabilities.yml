@@ -34,10 +34,18 @@
   blacklist:
     components:
       - BorgChassis
-  mutuallyExclusiveTraits:
-    - LegAmputeeL
-    - LegAmputeeR
-    - LegAmputeeBoth
+# Start TE - remake trait selection UI
+#  mutuallyExclusiveTraits:
+#    - LegAmputeeL
+#    - LegAmputeeR
+#    - LegAmputeeBoth
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LegAmputeeL
+      - LegAmputeeR
+      - LegAmputeeBoth
+# End TE - remake trait selection UI
   components:
     - type: BuckleOnMapInit
       prototype: VehicleWheelchair

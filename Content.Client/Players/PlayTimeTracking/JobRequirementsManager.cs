@@ -6,6 +6,7 @@ using Content.Shared.Players.JobWhitelist;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Preferences;
 using Content.Shared.Roles;
+using Content.Shared.Traits;
 using Robust.Client;
 using Robust.Client.Player;
 using Robust.Shared.Configuration;
@@ -145,11 +146,19 @@ public sealed partial class JobRequirementsManager : ISharedPlaytimeManager
         // End Frontier: alternate role time checks
     }
 
-    public bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    // Start TE - remake trait selector UI
+    public bool CheckTraitRequirements(TraitPrototype trait, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason)
+    {
+        var reqs = trait.Requirements;
+        return CheckRoleRequirements(reqs, profile, out reason, true);
+    }
+    // End TE - remake trait selector UI
+
+    public bool CheckRoleRequirements(HashSet<JobRequirement>? requirements, HumanoidCharacterProfile? profile, [NotNullWhen(false)] out FormattedMessage? reason, bool isTraitRequirement = false)
     {
         reason = null;
 
-        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers))
+        if (requirements == null || !_cfg.GetCVar(CCVars.GameRoleTimers) && !isTraitRequirement)
             return true;
 
         var reasons = new List<string>();

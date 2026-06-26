@@ -45,8 +45,15 @@
   description: trait-unrevivable-desc
   category: Physical
   cost: -4
-  speciesBlacklist: # HardLight
-  - IPC
+  # Start TE - remake trait selection UI
+#  speciesBlacklist: # HardLight
+#  - IPC
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
     - type: Unrevivable
       cloneable: true
