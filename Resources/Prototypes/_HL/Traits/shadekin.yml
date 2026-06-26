@@ -5,17 +5,21 @@
   description: hl-trait-mild-light-sensitivity-desc
   category: Physical
   cost: -1
-  speciesBlacklist:
-  - Shadekin
 # Start TE - remake trait selection UI
 #  mutuallyExclusiveTraits:
 #  - LightSensitivity
 #  - ExtremeLightSensitivity
+#  speciesBlacklist:
+#  - Shadekin
   requirements:
   - !type:TraitsRequirement
     excludedTraits:
       - LightSensitivity
       - ExtremeLightSensitivity
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - Shadekin
 # End TE - remake trait selection UI
   components:
   - type: LightSensitivity

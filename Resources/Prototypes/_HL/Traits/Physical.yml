@@ -21,9 +21,17 @@
   description: inoculated-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
-  - Synth
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+#  - Synth
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Synth
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -36,9 +44,9 @@
   description: insulated-text
   category: Physical
   cost: 10
-  speciesBlacklist:
-  - IPC
 # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
 #  mutuallyExclusiveTraits:
 #  - Heatresistant
 #  - Radproof
@@ -53,7 +61,11 @@
       - SnakeEater
       - Cryoresistant
       - PoolToy
-# End TE - remake trait selection UI
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   components:
   - type: Insulated
 

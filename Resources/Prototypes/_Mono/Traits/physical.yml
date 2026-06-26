@@ -18,14 +18,19 @@
 # Start TE - remake trait selection UI
 #  mutuallyExclusiveTraits:
 #  - Lethargy
+#  speciesBlacklist:
+#  - Oni
+#  - IPC
   requirements:
   - !type:TraitsRequirement
     excludedTraits:
       - Lethargy
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - Oni
+      - IPC
 # End TE - remake trait selection UI
-  speciesBlacklist:
-  - Oni
-  - IPC
   components:
   - type: Vigor
 
@@ -213,8 +218,15 @@
   description: trait-hemophilia-desc
   category: Physical
   cost: -4
-  speciesBlacklist:
-  - IPC
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#  - IPC
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+    - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -227,8 +239,15 @@
   description: trait-voracious-desc
   category: Physical
   cost: 1
-  speciesBlacklist:
-    - IPC
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#    - IPC
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -242,9 +261,17 @@
   description: trait-bionic-spinarette-desc
   category: Physical
   cost: 2
-  speciesBlacklist:
-    - IPC
-    - Arachnid
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#    - IPC
+#    - Arachnid
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+      - Arachnid
+  # End TE - remake trait selection UI
   blacklist:
     components:
     - BorgChassis
@@ -308,8 +335,15 @@
   description: trait-psionically-gifted-desc
   category: Physical
   cost: 6
-  speciesBlacklist:
-    - IPC
+  # Start TE - remake trait selection UI
+#  speciesBlacklist:
+#    - IPC
+  requirements:
+  - !type:SpeciesRequirement
+    inverted: true
+    species:
+      - IPC
+  # End TE - remake trait selection UI
   blacklist: # HardLight
     components:
     - BorgChassis
