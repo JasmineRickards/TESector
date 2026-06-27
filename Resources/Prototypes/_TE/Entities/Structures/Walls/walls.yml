@@ -1,0 +1,18 @@
+# Temporary addition for the event
+- type: entity
+  parent: BaseWall
+  id: TEWallCobblebrickIndestructible
+  name: hypercompacted rock
+  description: Harder than hard. There is nothing that can help you blast through this.
+  suffix: indestructible
+  components:
+  - type: Tag
+    tags:
+    - Wall
+  - type: Sprite
+    sprite: Structures/Walls/cobblebrick.rsi
+  - type: Icon
+    sprite: Structures/Walls/cobblebrick.rsi
+  - type: IconSmooth
+    key: cobblebricks
+    base: cobblebrick
