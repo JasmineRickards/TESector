@@ -109,7 +109,7 @@ Entries:
       message: Lead-footed no longer excludes itself!
   id: 12
   time: '2026-06-27T10:49:43.0000000+00:00'
-- author: Vukly_Aura
+- author: Vukly_Aura (sprites) & evil-serenity (code)
   changes:
     - type: Add
       message: TC now looks completely differently!
