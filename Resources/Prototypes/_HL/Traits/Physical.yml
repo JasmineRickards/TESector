@@ -4,14 +4,6 @@
   description: lead-footed-text
   category: Physical
   cost: 3
-# Start TE - remake trait selection UI
-#  mutuallyExclusiveTraits:
-#  - Leadfooted
-  requirements:
-  - !type:TraitsRequirement
-    excludedTraits:
-      - Leadfooted
-# End TE - remake trait selection UI
   components:
   - type: FTLKnockdownImmune
 
