@@ -113,9 +113,6 @@
   id: PatchPack
 
 - type: Tag
-  id: PlumbingDuct
-
-- type: Tag
   id: PowerCellTiny
 
 - type: Tag
