@@ -1,7 +1,6 @@
 using Content.Server._Starlight.Plumbing.NodeGroups;
 using Content.Server._Starlight.Plumbing.Nodes;
 using Content.Shared._Starlight.Plumbing.Components;
-using Content.Server.Chemistry.Components;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
@@ -37,73 +36,6 @@ public sealed class PlumbingPullSystem : EntitySystem
     }
 
     /// <summary>
-    ///     Returns all solution entities that should be considered sources for the given outlet.
-    ///     This handles containerSlotId pointing at a single slot as before, and expands
-    ///     ReagentDispenser storage slots so each stored jug can be pulled from individually.
-    /// </summary>
-    private List<Entity<SolutionComponent>> GetOutletSolutionEntities(EntityUid outletOwner, string nodeName, PlumbingOutletComponent outlet)
-    {
-        var res = new List<Entity<SolutionComponent>>();
-
-        // If ContainerSlotId is set, default behavior is to return the entity in that slot.
-        if (outlet.ContainerSlotId != null)
-        {
-            // Special-case: if this outlet owner is a ReagentDispenser, expose all storage slot contents
-            if (TryComp<ReagentDispenserComponent>(outletOwner, out var dispenserComp))
-            {
-                foreach (var slotId in dispenserComp.StorageSlotIds)
-                {
-                    var containerEntity = _itemSlots.GetItemOrNull(outletOwner, slotId);
-                    if (containerEntity == null)
-                        continue;
-
-                    // Try drainable solution (any usable solution on the stored container)
-                    if (_solutionSystem.TryGetDrainableSolution(containerEntity.Value, out var solEntEntity, out var sol))
-                    {
-                        if (solEntEntity != null)
-                            res.Add(solEntEntity.Value);
-                    }
-                }
-
-                return res;
-            }
-
-            // Fallback: original single-slot behavior
-            var containerEntity2 = _itemSlots.GetItemOrNull(outletOwner, outlet.ContainerSlotId);
-            if (containerEntity2 == null)
-                return res;
-
-            var solutionName = outlet.SolutionName;
-            if (_solutionSystem.TryGetSolution(containerEntity2.Value, solutionName, out var solutionEnt, out _))
-            {
-                if (solutionEnt != null)
-                    res.Add(solutionEnt.Value);
-            }
-
-            return res;
-        }
-
-        // No ContainerSlotId: use the outletOwner itself, with plumbing filter handling
-        var targetEntity = outletOwner;
-        var solutionNameTop = outlet.SolutionName;
-        if (targetEntity == outletOwner && TryComp<StarlightPlumbingFilterComponent>(outletOwner, out var filterComp))
-        {
-            if (nodeName.Equals(filterComp.FilterNodeName, StringComparison.OrdinalIgnoreCase))
-                solutionNameTop = filterComp.FilteredSolutionName;
-            else if (nodeName.Equals(filterComp.PassthroughNodeName, StringComparison.OrdinalIgnoreCase))
-                solutionNameTop = filterComp.PassthroughSolutionName;
-        }
-
-        if (_solutionSystem.TryGetSolution(targetEntity, solutionNameTop, out var solEntTop, out _))
-        {
-            if (solEntTop != null)
-                res.Add(solEntTop.Value);
-        }
-
-        return res;
-    }
-
-    /// <summary>
     ///     Pulls all allowed reagents from outlets on a plumbing network into a destination solution.
     /// </summary>
     /// <param name="puller">The entity doing the pulling.</param>
@@ -127,8 +59,8 @@ public sealed class PlumbingPullSystem : EntitySystem
         if (remaining <= 0)
             return (FixedPoint2.Zero, roundRobinIndex);
 
-        // Build list of valid outlets to pull from. Each outlet may produce multiple source solutions.
-        var outlets = new List<(PlumbingNode Node, PlumbingOutletComponent Outlet, Entity<SolutionComponent> Source)>();
+        // Build list of valid outlets to pull from
+        var outlets = new List<(PlumbingNode Node, PlumbingOutletComponent Outlet)>();
         foreach (var node in network.Nodes)
         {
             if (node is not PlumbingNode plumbingNode || plumbingNode.Owner == puller)
@@ -152,12 +84,7 @@ public sealed class PlumbingPullSystem : EntitySystem
             if (!isOutletNode)
                 continue;
 
-            // Expand to one or more source solutions for this outlet
-            var solutions = GetOutletSolutionEntities(plumbingNode.Owner, plumbingNode.Name, outlet);
-            foreach (var sol in solutions)
-            {
-                outlets.Add((plumbingNode, outlet, sol));
-            }
+            outlets.Add((plumbingNode, outlet));
         }
 
         if (outlets.Count == 0)
@@ -172,9 +99,9 @@ public sealed class PlumbingPullSystem : EntitySystem
         for (var i = 0; i < outlets.Count && remaining > 0; i++)
         {
             var index = (startIndex + i) % outlets.Count;
-            var (plumbingNode, outlet, sourceSol) = outlets[index];
+            var (plumbingNode, outlet) = outlets[index];
 
-            var pulled = PullFromOutlet(puller, plumbingNode.Owner, plumbingNode.Name, outlet, destination, remaining, sourceSol);
+            var pulled = PullFromOutlet(puller, plumbingNode.Owner, plumbingNode.Name, outlet, destination, remaining);
             totalPulled += pulled;
             remaining -= pulled;
         }
@@ -205,7 +132,7 @@ public sealed class PlumbingPullSystem : EntitySystem
             && passthroughDestination.Comp.Solution.AvailableVolume <= 0)
             return (FixedPoint2.Zero, roundRobinIndex);
 
-        var outlets = new List<(PlumbingNode Node, PlumbingOutletComponent Outlet, Entity<SolutionComponent> Source)>();
+        var outlets = new List<(PlumbingNode Node, PlumbingOutletComponent Outlet)>();
         foreach (var node in network.Nodes)
         {
             if (node is not PlumbingNode plumbingNode || plumbingNode.Owner == puller)
@@ -230,11 +157,7 @@ public sealed class PlumbingPullSystem : EntitySystem
             if (!isOutletNode)
                 continue;
 
-            var solutions = GetOutletSolutionEntities(plumbingNode.Owner, plumbingNode.Name, outlet);
-            foreach (var sol in solutions)
-            {
-                outlets.Add((plumbingNode, outlet, sol));
-            }
+            outlets.Add((plumbingNode, outlet));
         }
 
         if (outlets.Count == 0)
@@ -246,7 +169,7 @@ public sealed class PlumbingPullSystem : EntitySystem
         for (var i = 0; i < outlets.Count && remaining > 0; i++)
         {
             var index = (startIndex + i) % outlets.Count;
-            var (plumbingNode, outlet, sourceSol) = outlets[index];
+            var (plumbingNode, outlet) = outlets[index];
 
             var pulled = PullFromOutletSplit(
                 puller,
@@ -257,8 +180,7 @@ public sealed class PlumbingPullSystem : EntitySystem
                 passthroughDestination,
                 remaining,
                 filterEnabled,
-                filteredReagents,
-                sourceSol);
+                filteredReagents);
 
             totalPulled += pulled;
             remaining -= pulled;
@@ -331,36 +253,35 @@ public sealed class PlumbingPullSystem : EntitySystem
                 if (!isOutletNode)
                     continue;
 
-                var solutions = GetOutletSolutionEntities(plumbingNode.Owner, plumbingNode.Name, outlet);
-                foreach (var sourceSoln in solutions)
+                if (GetOutletSolution(plumbingNode.Owner, plumbingNode.Name, outlet) is not { } sourceSoln)
+                    continue;
+
+                var available = sourceSoln.Comp.Solution.GetReagentQuantity(new ReagentId(reagentId, null));
+                if (available <= 0)
+                    continue;
+
+                var attemptEv = new PlumbingPullAttemptEvent(puller, plumbingNode.Name, reagentId);
+                RaiseLocalEvent(plumbingNode.Owner, ref attemptEv);
+
+                if (attemptEv.Cancelled)
+                    continue;
+
+                var toPull = FixedPoint2.Min(available, stillNeeded);
+                toPull = FixedPoint2.Min(toPull, remaining);
+
+                var actualPulled = _solutionSystem.RemoveReagentAndReturn(sourceSoln, new ReagentId(reagentId, null), toPull);
+                if (actualPulled > 0)
                 {
-                    var available = sourceSoln.Comp.Solution.GetReagentQuantity(new ReagentId(reagentId, null));
-                    if (available <= 0)
-                        continue;
+                    _solutionSystem.TryAddReagent(destination, new ReagentId(reagentId, null), actualPulled, out var actuallyAdded);
 
-                    var attemptEv = new PlumbingPullAttemptEvent(puller, plumbingNode.Name, reagentId);
-                    RaiseLocalEvent(plumbingNode.Owner, ref attemptEv);
+                    // Return any excess to source to prevent loss
+                    var excess = actualPulled - actuallyAdded;
+                    if (excess > 0)
+                        _solutionSystem.TryAddReagent(sourceSoln, new ReagentId(reagentId, null), excess, out _);
 
-                    if (attemptEv.Cancelled)
-                        continue;
-
-                    var toPull = FixedPoint2.Min(available, stillNeeded);
-                    toPull = FixedPoint2.Min(toPull, remaining);
-
-                    var actualPulled = _solutionSystem.RemoveReagentAndReturn(sourceSoln, new ReagentId(reagentId, null), toPull);
-                    if (actualPulled > 0)
-                    {
-                        _solutionSystem.TryAddReagent(destination, new ReagentId(reagentId, null), actualPulled, out var actuallyAdded);
-
-                        // Return any excess to source to prevent loss
-                        var excess = actualPulled - actuallyAdded;
-                        if (excess > 0)
-                            _solutionSystem.TryAddReagent(sourceSoln, new ReagentId(reagentId, null), excess, out _);
-
-                        pulled[reagentId] = pulled.GetValueOrDefault(reagentId, FixedPoint2.Zero) + actuallyAdded;
-                        stillNeeded -= actuallyAdded;
-                        remaining -= actuallyAdded;
-                    }
+                    pulled[reagentId] = pulled.GetValueOrDefault(reagentId, FixedPoint2.Zero) + actuallyAdded;
+                    stillNeeded -= actuallyAdded;
+                    remaining -= actuallyAdded;
                 }
             }
         }
@@ -377,15 +298,12 @@ public sealed class PlumbingPullSystem : EntitySystem
         string nodeName,
         PlumbingOutletComponent outlet,
         Entity<SolutionComponent> destination,
-        FixedPoint2 maxAmount,
-        Entity<SolutionComponent>? sourceSolOverride = null)
+        FixedPoint2 maxAmount)
     {
-        Entity<SolutionComponent>? sourceSoln = sourceSolOverride ?? GetOutletSolution(sourceOwner, nodeName, outlet);
-        if (sourceSoln is null)
+        if (GetOutletSolution(sourceOwner, nodeName, outlet) is not { } sourceSoln)
             return FixedPoint2.Zero;
 
-        var sourceSolNonNull = sourceSoln.Value;
-        var sourceSolution = sourceSolNonNull.Comp.Solution;
+        var sourceSolution = sourceSoln.Comp.Solution;
         if (sourceSolution.Volume <= 0)
             return FixedPoint2.Zero;
 
@@ -433,7 +351,7 @@ public sealed class PlumbingPullSystem : EntitySystem
             if (toPull <= 0)
                 continue;
 
-            var pulled = _solutionSystem.RemoveReagentAndReturn(sourceSolNonNull, reagent, toPull);
+            var pulled = _solutionSystem.RemoveReagentAndReturn(sourceSoln, reagent, toPull);
             if (pulled > 0)
             {
                 _solutionSystem.TryAddReagent(destination, reagent, pulled, out var actuallyAdded);
@@ -441,7 +359,7 @@ public sealed class PlumbingPullSystem : EntitySystem
                 // Return any excess to source to prevent loss
                 var excess = pulled - actuallyAdded;
                 if (excess > 0)
-                    _solutionSystem.TryAddReagent(sourceSolNonNull, reagent, excess, out _);
+                    _solutionSystem.TryAddReagent(sourceSoln, reagent, excess, out _);
 
                 totalPulled += actuallyAdded;
                 remaining -= actuallyAdded;
@@ -463,15 +381,12 @@ public sealed class PlumbingPullSystem : EntitySystem
         Entity<SolutionComponent> passthroughDestination,
         FixedPoint2 maxAmount,
         bool filterEnabled,
-        HashSet<ProtoId<ReagentPrototype>> filteredReagents,
-        Entity<SolutionComponent>? sourceSolOverride = null)
+        HashSet<ProtoId<ReagentPrototype>> filteredReagents)
     {
-        Entity<SolutionComponent>? sourceSoln = sourceSolOverride ?? GetOutletSolution(sourceOwner, nodeName, outlet);
-        if (sourceSoln is null)
+        if (GetOutletSolution(sourceOwner, nodeName, outlet) is not { } sourceSoln)
             return FixedPoint2.Zero;
 
-        var sourceSolNonNull = sourceSoln.Value;
-        var sourceSolution = sourceSolNonNull.Comp.Solution;
+        var sourceSolution = sourceSoln.Comp.Solution;
         if (sourceSolution.Volume <= 0)
             return FixedPoint2.Zero;
 
@@ -520,7 +435,7 @@ public sealed class PlumbingPullSystem : EntitySystem
             if (toPull <= 0)
                 continue;
 
-            var pulled = _solutionSystem.RemoveReagentAndReturn(sourceSolNonNull, reagent, toPull);
+            var pulled = _solutionSystem.RemoveReagentAndReturn(sourceSoln, reagent, toPull);
             if (pulled <= 0)
                 continue;
 
@@ -528,7 +443,7 @@ public sealed class PlumbingPullSystem : EntitySystem
 
             var excess = pulled - actuallyAdded;
             if (excess > 0)
-                _solutionSystem.TryAddReagent(sourceSolNonNull, reagent, excess, out _);
+                _solutionSystem.TryAddReagent(sourceSoln, reagent, excess, out _);
 
             totalPulled += actuallyAdded;
             remaining -= actuallyAdded;
