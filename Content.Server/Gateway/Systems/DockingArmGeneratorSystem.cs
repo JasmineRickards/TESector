@@ -1,7 +1,6 @@
 using System.Linq;
 using System.Numerics;
 using Content.Server.Gateway.Components;
-using Content.Shared.Gateway.Components;
 using Content.Server.Parallax;
 using Content.Shared.CCVar;
 using Content.Shared.Dataset;

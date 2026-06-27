@@ -1,8 +1,0 @@
-- type: entity
-  parent: BaseNFFlatpack
-  id: BluespaceFlasherFlatpack
-  name: bluespace flasher flatpack
-  description: A flatpack used for constructing a bluespace flasher.
-  components:
-  - type: Flatpack
-    entity: BluespaceFlasher
