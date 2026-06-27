@@ -103,3 +103,9 @@ Entries:
       message: Trait selection UI is now completely different!
   id: 11
   time: '2026-06-26T08:31:17.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Fix
+      message: Lead-footed no longer excludes itself!
+  id: 12
+  time: '2026-06-27T10:49:43.0000000+00:00'
