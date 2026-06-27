@@ -6,12 +6,27 @@
   suffix: 20 TC
   description: It seems to be pulsing with suspiciously enticing energies.
   components:
+  # Start TE - new tc visuals
+#  - type: Sprite
+#    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+#    state: telecrystal
+#  - type: Item
+#    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+#    size: Tiny
   - type: Sprite
-    sprite: Objects/Specific/Syndicate/telecrystal.rsi
-    state: telecrystal
+    sprite: _TE/Objects/Specific/Syndicate/telecrystal.rsi/
+    layers:
+    - state: syndicate-telecrystal-pen
+    - state: syndicate-telecrystal-pen-blinking
+      shader: unshaded
   - type: Item
-    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+    sprite: _TE/Objects/Specific/Syndicate/telecrystal.rsi/
     size: Tiny
+  - type: PointLight
+    radius: 1.2
+    energy: 6
+    color: "#ac3232"
+  # End TE - new tc visuals
   - type: Stack
     count: 20
     stackType: Telecrystal
