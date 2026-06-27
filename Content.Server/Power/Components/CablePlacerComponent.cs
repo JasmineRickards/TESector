@@ -12,11 +12,5 @@ namespace Content.Server.Power.Components
 
         [DataField("blockingWireType")]
         public CableType BlockingCableType = CableType.HighVoltage;
-
-        /// <summary>
-        /// Whether the placed cable should go over tiles or not.
-        /// </summary>
-        [DataField]
-        public bool OverTile;
     }
 }

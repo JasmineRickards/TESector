@@ -17,10 +17,4 @@ public sealed partial class NullSpaceBlockerComponent : Component
     /// </summary>
     [DataField]
     public bool UnphaseOnCollide = true;
-
-    /// <summary>
-    /// If true, this will use PreventCollideEvent to cancel any collision except with nullspace entities.
-    /// </summary>
-    [DataField]
-    public bool CollideOnlyNullSpace = false;
 }

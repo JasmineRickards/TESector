@@ -37,8 +37,6 @@ public abstract partial class SharedNullSpaceSystem : EntitySystem
         SubscribeLocalEvent<NullSpaceComponent, GetExplosionResistanceEvent>(OnGetExplosionResistance);
         SubscribeLocalEvent<NullSpaceComponent, CanWeightlessMoveEvent>((_, _, args) => args.CanMove = true);
         SubscribeLocalEvent<NullSpaceComponent, IsWeightlessEvent>(OnIsWeightless);
-
-        SubscribeLocalEvent<NullSpaceBlockerComponent, PreventCollideEvent>(PreventCollision);
     }
 
     private void OnIsWeightless(Entity<NullSpaceComponent> entity, ref IsWeightlessEvent args)
@@ -106,17 +104,6 @@ public abstract partial class SharedNullSpaceSystem : EntitySystem
             return;
 
         if (HasComp<NullSpaceBlockerComponent>(args.OtherEntity))
-            return;
-
-        args.Cancelled = true;
-    }
-
-    private void PreventCollision(EntityUid uid, NullSpaceBlockerComponent component, ref PreventCollideEvent args)
-    {
-        if (!component.CollideOnlyNullSpace)
-            return;
-
-        if (HasComp<NullSpaceComponent>(args.OtherEntity))
             return;
 
         args.Cancelled = true;
