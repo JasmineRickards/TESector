@@ -5,7 +5,9 @@ using Content.Server.Radio.Components;
 using Content.Server.Roles;
 using Content.Server.Station.Systems;
 using Content.Shared.Administration;
+using Content.Shared.Administration.Logs;
 using Content.Shared.Chat;
+using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind;
@@ -34,6 +36,7 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly UserInterfaceSystem _userInterface = default!;
     [Dependency] private readonly EmagSystem _emag = default!;
+    [Dependency] private readonly ISharedAdminLogManager _adminLogger = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -81,6 +84,8 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
 
     private void OnLawProviderMindAdded(Entity<SiliconLawProviderComponent> ent, ref MindAddedMessage args)
     {
+        _adminLogger.Add(LogType.SiliconLaw, LogImpact.Low, $"{ent.Owner} laws at MindAdded are [{ent.Comp.Lawset?.LoggingString()}]");
+
         if (!ent.Comp.Subverted)
             return;
         EnsureSubvertedSiliconRole(args.Mind);
@@ -317,6 +322,10 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
     {
         base.NotifyLawsChanged(uid, cue);
 
+        if (!TryComp<SiliconLawProviderComponent>(uid, out var lawProvider))
+            return;
+        _adminLogger.Add(LogType.SiliconLaw, LogImpact.Low, $"{uid} laws changed to [{lawProvider.Lawset?.LoggingString()}]");
+
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
 
@@ -406,8 +415,17 @@ public sealed class SiliconLawSystem : SharedSiliconLawSystem
         if (!TryComp<SiliconLawProviderComponent>(to, out var _))
             return;
 
-        var lawset = GetLawset(fromLawsComp.Laws);
-        var lawCopies = lawset.Laws.Select(x => x.ShallowClone()).ToList();
+        // VRS: Prefer the source provider's *live* Lawset over its prototype default. The
+        // shunt/jump path used to call GetLawset(fromLawsComp.Laws), which always rebuilds the
+        // lawset from the prototype id stored in `Laws` and so wiped any in-game modifications
+        // (subverted/uploaded laws, removed laws) on the destination chassis.
+        // See HardLight issue #1361.
+        List<SiliconLaw> lawCopies;
+        if (fromLawsComp.Lawset is { Laws: { } liveLaws })
+            lawCopies = liveLaws.Select(x => x.ShallowClone()).ToList();
+        else
+            lawCopies = GetLawset(fromLawsComp.Laws).Laws.Select(x => x.ShallowClone()).ToList();
+
         SetLawsSilent(lawCopies, to);
     }
     // Corvax-Next-AiRemoteControl-End

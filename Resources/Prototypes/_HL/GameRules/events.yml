@@ -90,6 +90,7 @@
     - id: LizardVents
     - id: WawaVents
     - id: IrradiatedPests
+    - id: glimmervents
     # - id: GiftsEngineering
     # - id: GiftsFireProtection
     # - id: GiftsJanitor
@@ -699,14 +700,14 @@
     reoccurrenceDelay: 60
     requiredJobs:
       HeadOfSecurity: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobAdultSlimesBlueAngry
-      prob: 0.02
-    - id: MobAdultSlimesGreenAngry
-      prob: 0.02
-    - id: MobAdultSlimesYellowAngry
-      prob: 0.02
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobAdultSlimesBlueAngry
+      - id: MobAdultSlimesGreenAngry
+      - id: MobAdultSlimesYellowAngry
 
 - type: entity
   id: SnakeSpawn
@@ -723,14 +724,16 @@
     reoccurrenceDelay: 60
     requiredJobs:
       HeadOfSecurity: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobPurpleSnake
-      prob: 0.02
-    - id: MobSmallPurpleSnake
-      prob: 0.02
-    - id: MobCobraSpace
-      prob: 0.02
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobPurpleSnake
+      - id: MobSmallPurpleSnake
+      - id: MobCobraSpace
+      - id: NFMobSmallRainbowSnake
+
 
 - type: entity
   id: SpiderSpawn
@@ -747,10 +750,13 @@
     reoccurrenceDelay: 60
     requiredJobs:
       HeadOfSecurity: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobGiantSpiderAngry
-      prob: 0.05
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobGiantSpiderAngry
+      - id: MobSpiderSpace
 
 - type: entity
   id: SpiderClownSpawn
@@ -769,10 +775,12 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobClownSpider
-      prob: 0.05
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobClownSpider
 
 - type: entity
   id: ZombieOutbreak
@@ -1705,7 +1713,7 @@
 
 - type: entity
   id: ArgocyteVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1721,36 +1729,28 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobArgocyteSlurva
-      prob: 0.008
-    - id: MobArgocyteBarrier
-      prob: 0.01
-    - id: MobArgocyteSkitter
-      prob: 0.01
-    - id: MobArgocyteSwiper
-      prob: 0.01
-    - id: MobArgocyteMolder
-      prob: 0.01
-    - id: MobArgocytePouncer
-      prob: 0.01
-    - id: MobArgocyteGlider
-      prob: 0.01
-    - id: MobArgocyteHarvester
-      prob: 0.01
-    - id: MobArgocyteCrawler
-      prob: 0.01
-    - id: MobArgocyteEnforcer
-      prob: 0.01
-    - id: MobArgocyteFounder
-      prob: 0.01
-    - id: MobArgocyteLeviathing
-      prob: 0.001
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobArgocyteSlurva
+      - id: MobArgocyteBarrier
+      - id: MobArgocyteSkitter
+      - id: MobArgocyteSwiper
+      - id: MobArgocyteMolder
+      - id: MobArgocytePouncer
+      - id: MobArgocyteGlider
+      - id: MobArgocyteHarvester
+      - id: MobArgocyteCrawler
+      - id: MobArgocyteEnforcer
+      - id: MobArgocyteFounder
+      - id: MobArgocyteLeviathing
+
 
 - type: entity
   id: TickVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1762,10 +1762,15 @@
     minimumPlayers: 20
     weight: 6 # Really weak compared to other critters
     duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobTick
-      prob: 0.01
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobTick
+      - id: MobTickSalvage
+      - id: NFMobTick
+
 
 - type: entity
   id: MedicalBountyTargetsSpawn
@@ -1804,7 +1809,7 @@
 
 - type: entity
   id: CarpVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1820,24 +1825,24 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobCarp
-      prob: 0.008
-    - id: MobCarpMagic
-      prob: 0.01
-    - id: MobCarpHolo
-      prob: 0.03
-    - id: MobCarpRainbow
-      prob: 0.01
-    - id: MobShark
-      prob: 0.03
-    - id: MobCarpDragon
-      prob: 0.01
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobCarp
+      - id: MobCarpMagic
+      - id: MobCarpHolo
+      - id: MobCarpRainbow
+      - id: MobShark
+      - id: MobCarpDragon
+      - id: NFMobRainbowWyvernIce
+      - id: NFMobRainbowWyvernFire
+      - id: NFMobRainbowWyvernCaustic
 
 - type: entity
   id: SpaceVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1853,20 +1858,19 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobBearSpace
-      prob: 0.03
-    - id: MobKangarooSpace
-      prob: 0.05
-    - id: MobSpiderSpace
-      prob: 0.01
-    - id: MobCobraSpace
-      prob: 0.02
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobBearSpace
+      - id: MobKangarooSpace
+      - id: MobSpiderSpace
+      - id: MobCobraSpace
 
 - type: entity
   id: reagentslimeVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1882,72 +1886,46 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: ReagentSlimeBeer
-      prob: 0.003
-    - id: ReagentSlimePax
-      prob: 0.001
-    - id: ReagentSlimeNocturine
-      prob: 0.001
-    - id: ReagentSlimeTHC
-      prob: 0.002
-    - id: ReagentSlimeBicaridine
-      prob: 0.002
-    - id: ReagentSlimeToxin
-      prob: 0.002
-    - id: ReagentSlimeNapalm
-      prob: 0.002
-    - id: ReagentSlimeOmnizine
-      prob: 0.003
-    - id: ReagentSlimeMuteToxin
-      prob: 0.002
-    - id: ReagentSlimeNorepinephricAcid
-      prob: 0.002
-    - id: ReagentSlimeEphedrine
-      prob: 0.002
-    - id: ReagentSlimeRobustHarvest
-      prob: 0.003
-    - id: ReagentSlimeIchor
-      prob: 0.002
-    - id: ReagentSlimeBleach
-      prob: 0.001
-    - id: ReagentSlimeSoap
-      prob: 0.002
-    - id: ReagentSlimeSpacelube
-      prob: 0.002
-    - id: ReagentSlimeBuzzachloricbees
-      prob: 0.002
-    - id: ReagentSlimeCum
-      prob: 0.005
-    - id: ReagentSlimePomelustine
-      prob: 0.005
-    - id: ReagentSlimePhilterex
-      prob: 0.005
-    - id: ReagentSlimeLibidozenithizine
-      prob: 0.004
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: ReagentSlimeBeer
+      - id: ReagentSlimePax
+      - id: ReagentSlimeNocturine
+      - id: ReagentSlimeTHC
+      - id: ReagentSlimeBicaridine
+      - id: ReagentSlimeToxin
+      - id: ReagentSlimeNapalm
+      - id: ReagentSlimeOmnizine
+      - id: ReagentSlimeMuteToxin
+      - id: ReagentSlimeNorepinephricAcid
+      - id: ReagentSlimeEphedrine
+      - id: ReagentSlimeRobustHarvest
+      - id: ReagentSlimeIchor
+      - id: ReagentSlimeBleach
+      - id: ReagentSlimeSoap
+      - id: ReagentSlimeSpacelube
+      - id: ReagentSlimeBuzzachloricbees
+      - id: ReagentSlimeCum
+      - id: ReagentSlimePomelustine
+      - id: ReagentSlimePhilterex
+      - id: ReagentSlimeLibidozenithizine
     # - id: ReagentSlimeWehjuice
-      # prob: 0.0003
-    - id: ReagentCognizine
-      prob: 0.003
-    - id: ReagentSlimeNecrosol
-      prob: 0.002
-    - id: ReagentSlimeSpaceDrugs
-      prob: 0.003
-    - id: ReagentSlimeUnstableMutagen
-      prob: 0.001
-    - id: ReagentSlimeLead
-      prob: 0.001
-    - id: ReagentSlimechlorinetriflouride
-      prob: 0.002
-    - id: ReagentSlimePotassium
-      prob: 0.001
+      - id: ReagentCognizine
+      - id: ReagentSlimeNecrosol
+      - id: ReagentSlimeSpaceDrugs
+      - id: ReagentSlimeUnstableMutagen
+      - id: ReagentSlimeLead
+      - id: ReagentSlimechlorinetriflouride
+      - id: ReagentSlimePotassium
     # - id: ReagentSlimeLotophagoiOil
-      # prob: 0.0001
+
 
 - type: entity
   id: XenoVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -1963,60 +1941,71 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: XenoEggSpawner
-      prob: 0.01
-    - id: MobXenoPraetorianNPC
-      prob: 0.0001
-    - id: MobXenoDroneNPC
-      prob: 0.0001
-    - id: MobXenoQueenNPC
-      prob: 0.00001
-    - id: MobXenoRavagerNPC
-      prob: 0.0001
-    - id: MobXenoRunnerNPC
-      prob: 0.0001
-    - id: MobXenoRounyNPC
-      prob: 0.0001
-    - id: MobXenoSpitterNPC
-      prob: 0.0001
-    - id: MobXenoAcidRunner
-      prob: 0.0001
-    - id: MobXenoAcidRunnerPrimed
-      prob: 0.0001
-    - id: MobXenoLarva
-      prob: 0.01
-    - id: MobXenoBoiler
-      prob: 0.0001
-    - id: MobXenoBoxerWarrior
-      prob: 0.0001
-    - id: MobXenoCarrier
-      prob: 0.0001
-    - id: MobXenoCrusher
-      prob: 0.0001
-    - id: MobXenoChargerCrusher
-      prob: 0.0001
-    - id: MobXenoDancerPraetorian
-      prob: 0.0001
-    - id: MobXenoDefender
-      prob: 0.0001
-    - id: MobXenoSentinel
-      prob: 0.0001
-    - id: MobXenoHivelord
-      prob: 0.0001
-    - id: MobXenoParasite
-      prob: 0.0001
-    - id: MobXenoBloodyLarva
-      prob: 0.0001
-    - id: MobXenoLurker
-      prob: 0.0001
-    - id: MobXenoWarrior
-      prob: 0.0001
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: XenoEggSpawner
+      - id: MobXenoPraetorianNPC
+      - id: MobXenoDroneNPC
+      - id: MobXenoQueenNPC
+      - id: MobXenoRavagerNPC
+      - id: MobXenoRunnerNPC
+      - id: MobXenoRounyNPC
+      - id: MobXenoSpitterNPC
+      - id: MobXenoAcidRunner
+      - id: MobXenoAcidRunnerPrimed
+      - id: MobXenoLarva
+      - id: MobXenoBoiler
+      - id: MobXenoBoxerWarrior
+      - id: MobXenoCarrier
+      - id: MobXenoCrusher
+      - id: MobXenoChargerCrusher
+      - id: MobXenoDancerPraetorian
+      - id: MobXenoDefender
+      - id: MobXenoSentinel
+      - id: MobXenoHivelord
+      - id: MobXenoParasite
+      - id: MobXenoBloodyLarva
+      - id: MobXenoLurker
+      - id: MobXenoWarrior
+
+- type: entity
+  id: XenoVentsLarva
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/aliens.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 30
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobXenoSpitterLarva
+      - id: MobXenoSneakyLarva
+      - id: MobXenoMaleLarva
+      - id: MobXenoFemaleLarva
+      - id: MobXenoSpeedyLarva
+      - id: MobXenoLarva
+      - id: MobXenoParasite
+      - id: MobXenoBloodyLarva
 
 - type: entity
   id: AiVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -2032,50 +2021,273 @@
       HeadOfSecurity: 1
       SecurityOfficer: 1
       Warden: 1
-  - type: VentCrittersRule
-    entries:
-    - id: MobRogueSiliconScrap
-      prob: 0.008
-    - id: MobRogueSiliconScrapThreads
-      prob: 0.008
-    - id: MobRogueSiliconScrapThrusters
-      prob: 0.008
-    - id: MobRogueSiliconScrapThrustersRanged
-      prob: 0.008
-    - id: MobRogueSiliconScrapFlayer
-      prob: 0.007
-    - id: MobRogueSiliconDroneLethals
-      prob: 0.005
-    - id: MobRogueSiliconDroneNonLethals
-      prob: 0.01
-    - id: MobRogueSiliconDroneScience
-      prob: 0.001
-    - id: MobRogueSiliconViscerator
-      prob: 0.009
-    - id: MobRogueSiliconServo
-      prob: 0.001
-    - id: MobRogueSiliconHerder
-      prob: 0.001
-    - id: MobRogueSiliconHunter
-      prob: 0.001
-    - id: MobRogueSiliconTesla
-      prob: 0.001
-    - id: MobRogueSiliconGuardian
-      prob: 0.001
-    - id: MobRogueSiliconBoss
-      prob: 0.0001
-    - id: MobRogueSiliconScrapAsteroid
-      prob: 0.001
-    - id: MobRogueSiliconScrapThreadsAsteroid
-      prob: 0.001
-    - id: MobRogueSiliconScrapThrustersAsteroid
-      prob: 0.001
-    - id: MobRogueSiliconScrapThrustersRangedAsteroid
-      prob: 0.001
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobRogueSiliconScrap
+      - id: MobRogueSiliconScrapThreads
+      - id: MobRogueSiliconScrapThrusters
+      - id: MobRogueSiliconScrapThrustersRanged
+      - id: MobRogueSiliconScrapFlayer
+      - id: MobRogueSiliconDroneLethals
+      - id: MobRogueSiliconDroneNonLethals
+      - id: MobRogueSiliconDroneScience
+      - id: MobRogueSiliconViscerator
+      - id: MobRogueSiliconServo
+      - id: MobRogueSiliconHerder
+      - id: MobRogueSiliconHunter
+      - id: MobRogueSiliconTesla
+      - id: MobRogueSiliconGuardian
+      - id: MobRogueSiliconBoss
+      - id: MobRogueSiliconScrapAsteroid
+      - id: MobRogueSiliconScrapThreadsAsteroid
+      - id: MobRogueSiliconScrapThrustersAsteroid
+      - id: MobRogueSiliconScrapThrustersRangedAsteroid
+
+- type: entity
+  id: Syndivents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 400
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobSyndicateNavalCaptain
+      - id: SpawnMobSyndicateNavalEngineer
+      - id: SpawnMobSyndicateNavalMedic
+      - id: SpawnMobSyndicateNavalSecondOfficer
+      - id: SpawnMobSyndicateNavalOperator
+      - id: SpawnMobSyndicateNavalGrenadier
+      - id: SpawnMobSyndicateNavalSaboteur
+      - id: SpawnMobExperimentationVictim
+      - id: SpawnMobSyndicateNavalCommander
+      - id: SpawnMobSyndicateNavalDeckhand
+      - id: SpawnMobSyndicateNavalChemwarrior
+      - id: SpawnMobSyndicateNavalHorror
+      - id: SpawnMobSyndicateNavalHardVoid
+
+- type: entity
+  id: Dinosaurvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/_HL/Freeallegiance/lizard10.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobDinosaurSmall
+      - id: SpawnMobDinosaurMedium
+      - id: SpawnMobDinosaurBig
+
+- type: entity
+  id: Fleshvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/aliens.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobAberrantFleshExpeditions
+      - id: SpawnMobAberrantFleshNewbornExpeditions
+
+- type: entity
+  id: Explorervents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/intercept.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobExplorerT1
+      - id: SpawnMobExplorerT2
+      - id: SpawnMobExplorerT3
+
+- type: entity
+  id: Mercvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/intercept.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobMercenaryT1
+      - id: SpawnMobMercenaryT2
+      - id: SpawnMobMercenaryT3
+
+- type: entity
+  id: Zedvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/outbreak7.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobZTaken
+      - id: MobZVasophage
+      - id: MobZHeadless
+      - id: MobZBloated
+      - id: MobZCarrier
+      - id: MobZP0
+
+- type: entity
+  id: Punkvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/intercept.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobPunkT1
+      - id: SpawnMobPunkT2
+      - id: SpawnMobPunkT3
+      - id: MobPunkGangerSmg
+      - id: MobPunkGangerShotgun
+      - id: MobPunkGangerPistol
+      - id: SpawnMobPunkLeader
+
+- type: entity
+  id: Cultvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/intercept.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 300
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+      SecurityOfficer: 1
+      Warden: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: SpawnMobBloodCultistZealotMelee
+      - id: SpawnMobBloodCultLeech
+      - id: SpawnMobBloodCultistZealotRanged
+      - id: SpawnMobBloodCultistCaster
+      - id: BloodCultTurret
+      - id: SpawnMobBloodCultistAcolyte
+      - id: SpawnMobBloodCultistPriest
+      - id: SpawnMobBloodCultistJanitor
+      - id: MobBloodCultistAscended
+
 
 - type: entity
   id: LizardVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -2089,40 +2301,58 @@
     duration: 60
     requiredJobs:
       HeadOfSecurity: 1
-  - type: VentCrittersRule
-    entries:
-    - id: BlueRainLizard
-      prob: 0.005
-    - id: HostileBlueRainLizard
-      prob: 0.001
-    - id: GreenRainLizard
-      prob: 0.004
-    - id: HostileGreenRainLizard
-      prob: 0.001
-    - id: PinkRainLizard
-      prob: 0.005
-    - id: HostilePinkRainLizard
-      prob: 0.001
-    - id: WhiteRainLizard
-      prob: 0.001
-    - id: HostileWhiteRainLizard
-      prob: 0.001
-    - id: CyanRainLizard
-      prob: 0.001
-    - id: HostileCyanRainLizard
-      prob: 0.001
-    - id: RedRainLizard
-      prob: 0.001
-    - id: HostileRedRainLizard
-      prob: 0.001
-    - id: TrainRainLizard
-      prob: 0.001
-    - id: HostileTrainRainLizard
-      prob: 0.001
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 12
+      children:
+      - id: BlueRainLizard
+      - id: HostileBlueRainLizard
+      - id: GreenRainLizard
+      - id: HostileGreenRainLizard
+      - id: PinkRainLizard
+      - id: HostilePinkRainLizard
+      - id: WhiteRainLizard
+      - id: HostileWhiteRainLizard
+      - id: CyanRainLizard
+      - id: HostileCyanRainLizard
+      - id: RedRainLizard
+      - id: HostileRedRainLizard
+      - id: TrainRainLizard
+      - id: HostileTrainRainLizard
+
+- type: entity
+  id: HostileLizardVents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 10
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+    requiredJobs:
+      HeadOfSecurity: 1
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 12
+      children:
+      - id: HostileBlueRainLizard
+      - id: HostileGreenRainLizard
+      - id: HostilePinkRainLizard
+      - id: HostileWhiteRainLizard
+      - id: HostileCyanRainLizard
+      - id: HostileRedRainLizard
+      - id: HostileTrainRainLizard
 
 - type: entity
   id: WawaVents
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -2134,14 +2364,94 @@
     minimumPlayers: 40
     weight: 6 # Really weak compared to other critters
     duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobEmotionalSupportScurret
-      prob: 0.02
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 50
+      children:
+      - id: MobEmotionalSupportScurret
+
+- type: entity
+  id: glimmervents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 40
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 10
+      children:
+      - id: MobGlimmerMite
+
+- type: entity
+  id: Abyssvents
+  parent: BaseGameRule
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-vent-creatures-start-announcement
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    earliestStart: 30
+    reoccurrenceDelay: 200
+    minimumPlayers: 40
+    weight: 6 # Really weak compared to other critters
+    duration: 60
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 10
+      children:
+      - id: PortalAbyssal
+      - id: PortalAbyssalGhost
+
+# - type: entity
+  # id: Lavavents
+  # parent: BaseGameRule
+  # categories: [ HideSpawnMenu ]
+  # components:
+  # - type: StationEvent
+    # startAnnouncement: station-event-vent-creatures-start-announcement
+    # startAudio:
+      # path: /Audio/Announcements/attention.ogg
+    # earliestStart: 30
+    # reoccurrenceDelay: 200
+    # minimumPlayers: 40
+    # weight: 6 # Really weak compared to other critters
+    # duration: 60
+  # - type: VentHordeRule
+    # table: !type:GroupSelector
+      # rolls: !type:RangeNumberSelector
+        # range: 1, 5
+      # children:
+      # - id: MobWatcherLavaland
+      # - id: MobWatcherIcewing
+      # - id: MobWatcherMagmawing
+      # - id: MobWatcherPride
+      # - id: MobHellspawn
+      # - id: LavaTalon
+      # - id: MobGoliath
+      # - id: MobHivelord
+      # - id: MobLavalandGoliath
+      # - id: MobLavalandGoldgrub
+      # - id: MobLavalandLegion
+      # - id: MobLavalandHierophant
+      # - id: MobLavalandAshDrake
+      # - id: MobLavalandBubblegum
+
 
 - type: entity
   id: Beehallucination
-  parent: [VentCrittersBase, BaseGameRule]
+  parent: BaseGameRule
   categories: [ HideSpawnMenu ]
   components:
   - type: StationEvent
@@ -2152,11 +2462,13 @@
     reoccurrenceDelay: 200
     minimumPlayers: 40
     weight: 6 # Really weak compared to other critters
-    duration: 60
-  - type: VentCrittersRule
-    entries:
-    - id: MobAngryBeeTimed
-      prob: 0.9
+    duration: 10
+  - type: VentHordeRule
+    table: !type:GroupSelector
+      rolls: !type:RangeNumberSelector
+        range: 1, 100
+      children:
+      - id: MobAngryBeeTimed
 
 # Dynamic Job Allocation Rule
 # Adjusts Mercenary slots based on active staffed crew
@@ -2171,6 +2483,3 @@
     checkInterval: 600  # Check every 10 minutes (600 seconds)
     mercenaryJob: Mercenary
     mercenaryCap: 40  # Maximum slots
-
-
-

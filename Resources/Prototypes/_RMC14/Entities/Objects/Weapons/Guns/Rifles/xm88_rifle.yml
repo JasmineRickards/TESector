@@ -12,11 +12,12 @@
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Rifles/xm88/desert.rsi
   - type: Gun
-    fireRate: 0.8
+    fireRate: 0.5
     shotsPerBurst: 1
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    projectileSpeed: 35
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_boomslang_fire.ogg
   # - type: RMCSelectiveFire
@@ -103,7 +104,12 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 50
+        Piercing: 100
+        Structural: 1010
+    armorPenetration: 80
+    penetrationThreshold: 360
+    penetrationDamageTypeRequirement:
+    - Structural
   # - type: CMArmorPiercing
     # amount: 10
   # - type: GunStacksProjectile

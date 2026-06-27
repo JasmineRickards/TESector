@@ -4,8 +4,8 @@ meta:
   engineVersion: 274.0.0
   forkId: ""
   forkVersion: ""
-  time: 05/13/2026 21:26:27
-  entityCount: 29145
+  time: 05/30/2026 15:59:49
+  entityCount: 29149
 maps:
 - 1
 grids:
@@ -20038,10 +20038,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28970
@@ -20067,10 +20064,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28972
@@ -20096,10 +20090,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28974
@@ -20125,10 +20116,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28976
@@ -20154,10 +20142,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28978
@@ -20183,10 +20168,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28980
@@ -20212,10 +20194,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28982
@@ -20241,10 +20220,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28984
@@ -20270,10 +20246,7 @@ entities:
       solution:
         maxVol: 500
         name: tank
-        reagents:
-        - data: []
-          ReagentId: Water
-          Quantity: 500
+        reagents: []
     - type: ContainedSolution
       containerName: tank
   - uid: 28986
@@ -25241,7 +25214,7 @@ entities:
       pos: 24.5,16.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -108797.516
+      secondsUntilStateChange: -109495.695
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -26794,7 +26767,7 @@ entities:
       pos: 9.5,25.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -22054.012
+      secondsUntilStateChange: -22752.195
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -31978,7 +31951,7 @@ entities:
   - uid: 1453
     components:
     - type: Transform
-      pos: -6.0280805,52.564606
+      pos: -5.08096,52.650185
       parent: 2
     - type: Tag
       tags:
@@ -81876,16 +81849,6 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -15.5,30.5
       parent: 2
-  - uid: 10725
-    components:
-    - type: Transform
-      pos: 8.5,28.5
-      parent: 2
-  - uid: 10726
-    components:
-    - type: Transform
-      pos: 9.5,28.5
-      parent: 2
   - uid: 10727
     components:
     - type: Transform
@@ -90424,7 +90387,7 @@ entities:
   - uid: 11167
     components:
     - type: Transform
-      pos: -3.3809297,-63.418907
+      pos: -3.4855635,-63.39679
       parent: 2
 - proto: ClothingEyesGlassesSunglasses
   entities:
@@ -91215,6 +91178,7 @@ entities:
       channels:
       - Engineering
       - Common
+      - Faction
 - proto: ClothingMaskBreath
   entities:
   - uid: 11225
@@ -91586,7 +91550,7 @@ entities:
   - uid: 11269
     components:
     - type: Transform
-      pos: -6.4873962,52.56498
+      pos: -5.67471,49.60331
       parent: 2
 - proto: ClothingOuterArmorBulletproof
   entities:
@@ -92249,11 +92213,6 @@ entities:
     - type: Transform
       pos: 15.5,-34.5
       parent: 2
-  - uid: 11338
-    components:
-    - type: Transform
-      pos: 43.5,-44.5
-      parent: 2
   - uid: 11339
     components:
     - type: Transform
@@ -92315,11 +92274,6 @@ entities:
     components:
     - type: Transform
       pos: 70.5,-55.5
-      parent: 2
-  - uid: 11351
-    components:
-    - type: Transform
-      pos: 46.5,-44.5
       parent: 2
   - uid: 11352
     components:
@@ -92939,6 +92893,13 @@ entities:
     - type: Transform
       pos: -0.5,-4.5
       parent: 2
+- proto: ComputerContrabandPalletConsole
+  entities:
+  - uid: 10725
+    components:
+    - type: Transform
+      pos: 8.5,28.5
+      parent: 2
 - proto: ComputerCrewMonitoring
   entities:
   - uid: 11454
@@ -93027,12 +92988,31 @@ entities:
       parent: 2
 - proto: ComputerDnaScanner
   entities:
+  - uid: 13550
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,-44.5
+      parent: 2
+    - type: DeviceLinkSource
+      linkedPorts:
+        11338:
+        - - DnaConsole
+          - MedicalScannerReceiver
+    - type: DnaScannerConsole
+      nextHealthUpdate: 0
+      jokerCooldownEnd: 0
   - uid: 24243
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 46.5,-47.5
       parent: 2
+    - type: DeviceLinkSource
+      linkedPorts:
+        19687:
+        - - DnaConsole
+          - MedicalScannerReceiver
     - type: DnaScannerConsole
       nextHealthUpdate: 0
       jokerCooldownEnd: 0
@@ -93045,12 +93025,6 @@ entities:
       parent: 2
 - proto: ComputerFrame
   entities:
-  - uid: 1520
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,-44.5
-      parent: 2
   - uid: 11470
     components:
     - type: Transform
@@ -93572,6 +93546,18 @@ entities:
       parent: 2
     - type: Physics
       bodyType: Dynamic
+- proto: ContrabandPallet
+  entities:
+  - uid: 10726
+    components:
+    - type: Transform
+      pos: 9.5,28.5
+      parent: 2
+  - uid: 21203
+    components:
+    - type: Transform
+      pos: 10.5,28.5
+      parent: 2
 - proto: ConveyorBelt
   entities:
   - uid: 11559
@@ -94980,6 +94966,9 @@ entities:
       rot: 1.5707963267948966 rad
       pos: 16.5,41.5
       parent: 2
+    - type: Door
+      secondsUntilStateChange: -319.23105
+      state: Opening
 - proto: d20Dice
   entities:
   - uid: 11719
@@ -105792,6 +105781,11 @@ entities:
       parent: 2
 - proto: filingCabinet
   entities:
+  - uid: 1520
+    components:
+    - type: Transform
+      pos: -7.5,-64.5
+      parent: 2
   - uid: 13534
     components:
     - type: Transform
@@ -105861,11 +105855,6 @@ entities:
       parent: 2
 - proto: filingCabinetDrawerRandom
   entities:
-  - uid: 13547
-    components:
-    - type: Transform
-      pos: 36.5,-38.5
-      parent: 2
   - uid: 13548
     components:
     - type: Transform
@@ -105878,11 +105867,6 @@ entities:
       parent: 2
 - proto: filingCabinetRandom
   entities:
-  - uid: 13550
-    components:
-    - type: Transform
-      pos: -7.5,-65.5
-      parent: 2
   - uid: 13551
     components:
     - type: Transform
@@ -107865,7 +107849,7 @@ entities:
       pos: 18.5,-13.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -16028.521
+      secondsUntilStateChange: -16726.705
       state: Closing
   - uid: 13779
     components:
@@ -107873,7 +107857,7 @@ entities:
       pos: 18.5,-14.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -16064.222
+      secondsUntilStateChange: -16762.406
       state: Closing
   - uid: 13780
     components:
@@ -108041,7 +108025,7 @@ entities:
       pos: -34.5,-14.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -102986.055
+      secondsUntilStateChange: -103684.234
       state: Closing
   - uid: 13807
     components:
@@ -150215,6 +150199,11 @@ entities:
     - type: Transform
       pos: 38.5,-4.5
       parent: 2
+  - uid: 23582
+    components:
+    - type: Transform
+      pos: -6.5,52.5
+      parent: 2
 - proto: KitchenKnife
   entities:
   - uid: 19574
@@ -151297,12 +151286,6 @@ entities:
       - Failed
 - proto: MachineFrame
   entities:
-  - uid: 19576
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 46.5,-45.5
-      parent: 2
   - uid: 19688
     components:
     - type: Transform
@@ -151837,6 +151820,11 @@ entities:
       parent: 2
 - proto: MedicalScanner
   entities:
+  - uid: 11338
+    components:
+    - type: Transform
+      pos: 46.5,-45.5
+      parent: 2
   - uid: 19687
     components:
     - type: Transform
@@ -160921,6 +160909,48 @@ entities:
       rot: 3.141592653589793 rad
       pos: 19.5,-10.5
       parent: 2
+- proto: PrinterDoc
+  entities:
+  - uid: 11351
+    components:
+    - type: Transform
+      pos: 36.5,-38.5
+      parent: 2
+  - uid: 13547
+    components:
+    - type: Transform
+      pos: -7.5,-65.5
+      parent: 2
+  - uid: 19576
+    components:
+    - type: Transform
+      pos: -33.5,-27.5
+      parent: 2
+  - uid: 23972
+    components:
+    - type: Transform
+      pos: 14.5,39.5
+      parent: 2
+  - uid: 24051
+    components:
+    - type: Transform
+      pos: 0.5,-8.5
+      parent: 2
+  - uid: 29147
+    components:
+    - type: Transform
+      pos: -10.5,-24.5
+      parent: 2
+  - uid: 29148
+    components:
+    - type: Transform
+      pos: -10.5,14.5
+      parent: 2
+  - uid: 29149
+    components:
+    - type: Transform
+      pos: -2.5,32.5
+      parent: 2
 - proto: Protolathe
   entities:
   - uid: 20881
@@ -160982,7 +161012,6 @@ entities:
     - type: TileFrictionModifier
       modifier: 1
     - type: Evaporation
-      nextTick: 0
   - uid: 20884
     components:
     - type: Transform
@@ -161003,7 +161032,6 @@ entities:
     - type: TileFrictionModifier
       modifier: 1
     - type: Evaporation
-      nextTick: 0
   - uid: 20885
     components:
     - type: Transform
@@ -161025,7 +161053,6 @@ entities:
     - type: TileFrictionModifier
       modifier: 1
     - type: Evaporation
-      nextTick: 0
   - uid: 20886
     components:
     - type: Transform
@@ -161047,7 +161074,6 @@ entities:
     - type: TileFrictionModifier
       modifier: 1
     - type: Evaporation
-      nextTick: 0
 - proto: Rack
   entities:
   - uid: 20887
@@ -162689,11 +162715,6 @@ entities:
     components:
     - type: Transform
       pos: 43.5,10.5
-      parent: 2
-  - uid: 21203
-    components:
-    - type: Transform
-      pos: 9.5,27.5
       parent: 2
   - uid: 21204
     components:
@@ -168126,14 +168147,14 @@ entities:
   - uid: 22261
     components:
     - type: Transform
-      pos: -33.048824,-27.254221
+      pos: -32.757675,-27.215582
       parent: 2
 - proto: RubberStampDenied
   entities:
   - uid: 22262
     components:
     - type: Transform
-      pos: -32.93945,-27.410471
+      pos: -32.74205,-27.418707
       parent: 2
 - proto: SalvageMagnet
   entities:
@@ -169204,6 +169225,8 @@ entities:
       containers:
         solution@food: !type:ContainerSlot
           ent: 28919
+    - type: StackSignature
+      signature: SheetUranium|Radium=200;Uranium=800;
 - proto: Shovel
   entities:
   - uid: 22363
@@ -180640,11 +180663,6 @@ entities:
           ent: 29002
 - proto: Table
   entities:
-  - uid: 23527
-    components:
-    - type: Transform
-      pos: -33.5,-27.5
-      parent: 2
   - uid: 23528
     components:
     - type: Transform
@@ -180905,11 +180923,6 @@ entities:
     components:
     - type: Transform
       pos: -18.5,16.5
-      parent: 2
-  - uid: 23582
-    components:
-    - type: Transform
-      pos: -6.5,52.5
       parent: 2
   - uid: 23583
     components:
@@ -182529,6 +182542,11 @@ entities:
       parent: 2
 - proto: TableReinforced
   entities:
+  - uid: 23527
+    components:
+    - type: Transform
+      pos: -3.5,-63.5
+      parent: 2
   - uid: 23901
     components:
     - type: Transform
@@ -182885,11 +182903,6 @@ entities:
     components:
     - type: Transform
       pos: -4.5,-62.5
-      parent: 2
-  - uid: 23972
-    components:
-    - type: Transform
-      pos: -3.5,-63.5
       parent: 2
   - uid: 23973
     components:
@@ -183288,11 +183301,6 @@ entities:
     components:
     - type: Transform
       pos: 13.5,39.5
-      parent: 2
-  - uid: 24051
-    components:
-    - type: Transform
-      pos: 14.5,39.5
       parent: 2
   - uid: 24052
     components:
@@ -185503,6 +185511,11 @@ entities:
     components:
     - type: Transform
       pos: 6.5,40.5
+      parent: 2
+  - uid: 29146
+    components:
+    - type: Transform
+      pos: 10.5,26.5
       parent: 2
 - proto: VendingMachineSeeds
   entities:

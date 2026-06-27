@@ -17,6 +17,8 @@
       offset: 0.715, 0.025
   - type: Item
     size: Large
+    shape:
+    - 0,0,3,1
   - type: Clothing
     sprite: _RMC14/Objects/Weapons/Guns/Snipers/m96s/desert.rsi
   - type: Tag
@@ -29,8 +31,14 @@
   - type: Wieldable
   - type: Gun
     shotsPerBurst: 1
+    fireRate: 1.5
+    projectileSpeed: 50
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_sniper.ogg
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 10
+    pvsIncrease: 1
   # - type: RMCSelectiveFire
     # recoilWielded: 1
     # scatterWielded: 0
@@ -53,6 +61,8 @@
     # whitelist:
       # components:
       # - SniperWhitelist
+  - type: GunDamageModifier
+    multiplier: 1.455
   - type: GunRequiresWield
   - type: Corrodible
     isCorrodible: false

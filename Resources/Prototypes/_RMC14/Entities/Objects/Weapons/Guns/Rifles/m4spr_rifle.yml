@@ -22,6 +22,8 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    fireRate: 3
+    projectileSpeed: 35
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
   # - type: RMCSelectiveFire
@@ -55,7 +57,7 @@
           - CMMagazineRifleM4SPRAP
           - CMMagazineRifleM4SPRExt
   - type: GunDamageModifier
-    multiplier: 1.4
+    multiplier: 2.0
   # - type: AttachableHolder
     # slots:
       # rmc-aslot-barrel:

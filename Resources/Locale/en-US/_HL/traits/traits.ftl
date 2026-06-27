@@ -44,6 +44,10 @@ hl-trait-voice-wawa-desc = Through one way or another, you sound like an adorabl
 hl-trait-horny-name = Horny
 hl-trait-horny-desc = Your moods have a tendency to be erotic, and drive you to act accordingly.
 
+
+hl-trait-scandinavian-name = Scandinavian accent
+hl-trait-scandinavian-desc = You have to assemble the sentence yourself.
+
 lead-footed-name = Lead-footed
 lead-footed-text = Somehow able to stay standing during the rigors of FTL.
 inoculated-name = Inoculated
@@ -71,6 +75,9 @@ hl-trait-egglayer-desc = You produce and lay eggs (10 cum per egg)
 
 hl-trait-egglayer-infertile-name = Egg Layer (very infertile)
 hl-trait-egglayer-infertile-desc = You produce eggs very slowly and seldomly (50 cum per egg)
+
+hl-trait-Prizeballlayer = Gashaponsition
+hl-trait-Prizeballlayer-desc = You produce and dispense Prizeballs (50 Tickets per Prizeball)
 
 hl-trait-Brainwasher-name = Brainwasher
 hl-trait-Brainwasher-desc = Through natural or artificial means, you have the ability to brainwash peoples.
@@ -129,3 +136,24 @@ hl-trait-romantic-moods-desc = Every half hour or so you receive a private remin
 trait-hardskin-name = Hard Skin
 trait-hardskin-desc = Your skin is too hard for needles to pierce.
 injector-component-deny-hardskin = {CAPITALIZE(THE($target))}'s skin is too hard for the needle to pierce.
+
+trait-ultravision-nobypass-name = Ultraviolet vision (Untoggleable)
+trait-ultravision-nobypass-desc = Through a random mutation, you perceive the world with ultraviolet light. (Note this cannot be disable with the accessibility toggle)
+
+trait-deuteranopia-nobypass-name = Deuteranopia (Untoggleable)
+trait-deuteranopia-nobypass-desc = Through a random mutation, you have red-green colour blindness. (Note this cannot be disable with the accessibility toggle)
+
+trait-low-voice-name = Low voice
+trait-low-voice-desc = Your emotes sound a little deeper than usual.
+
+trait-lowest-voice-name = Deep voice
+trait-lowest-voice-desc = Your emotes sound much deeper than usual.
+
+trait-high-voice-name = High voice
+trait-high-voice-desc = Your emotes sound a little higher than usual.
+
+trait-highest-voice-name = Squeaky voice
+trait-highest-voice-desc = Your emotes sound much higher than usual.
+
+trait-test-bionic-spinarette-name = Test Bionic Spinarette
+trait-test-bionic-spinarette-desc = Speeeeeeen

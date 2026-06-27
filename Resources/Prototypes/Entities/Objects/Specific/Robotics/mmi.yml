@@ -28,6 +28,7 @@
     - Binary
     - Trinary # Hardlight
     - Common
+    - Faction
   - type: NameIdentifier
     group: MMI
   - type: DoAfter
@@ -58,6 +59,7 @@
     whitelist:
       components:
       - SecretStash
+  - type: RetroMonitorView # Mono - #3902
 
 - type: entity
   parent: MMI
@@ -148,3 +150,4 @@
       whitelist:
         components:
         - SecretStash
+    - type: RetroMonitorView # Mono - #3902
