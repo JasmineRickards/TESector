@@ -115,3 +115,11 @@ Entries:
       message: TC now looks completely differently!
   id: 13
   time: '2026-06-27T10:51:41.0000000+00:00'
+- author: evil-serenity
+  changes:
+    - type: Fix
+      message: >-
+        Unnatural Regeneration and Natural Regeneration traits are no longer
+        one-sidedly excluded by dark regeneration traits.
+  id: 14
+  time: '2026-06-27T10:51:08.0000000+00:00'
