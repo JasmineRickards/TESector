@@ -168,7 +168,7 @@
           True: {visible: true}
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.5 # Frontier reverted on Hardlight
-    baseSprintSpeed: 5.0 # Frontier reverted on Hardlight
+    baseSprintSpeed: 4.7 # TE: speed rebalance 5 < 4.7
     weightlessAcceleration: 2.5
   - type: Inventory
     speciesId: harpy
