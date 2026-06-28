@@ -114,7 +114,7 @@
           components:
             - GasTank
     - type: StaticPrice
-      price: 125 # Frontier: 200<125
+      price: 200 # HL: Price balancing
     - type: AccessReader
 #      access: [["Atmospherics"], ["Engineering"], ["Research"], ["Captain"]] # Frontier
     - type: Construction # Frontier
@@ -193,7 +193,7 @@
     gasMixture:
       volume: 10000
       moles:
-        - 3105.16773609 # oxygen 21%
+        - 3930.592071 # oxygen 21%
         - 14786.513029 # nitrogen 79%
       temperature: 293.15
   - type: Destructible
@@ -276,7 +276,7 @@
     gasMixture:
       volume: 10000
       moles:
-        - 18710.71051 # oxygen
+        - 187107.1051 # oxygen
       temperature: 72
 #  - type: AccessReader # Frontier
 #    access: [["Atmospherics"]] # Frontier
@@ -537,7 +537,7 @@
           - 0 # nitrogen
           - 0 # CO2
           - 0 # Plasma
-          - 1871.71051 # Tritium
+          - 18717.1051 # Tritium
         temperature: 293.15
     - type: Destructible
       thresholds:
@@ -725,7 +725,7 @@
       - 0 # Water vapor
       - 0 # Ammonia
       - 0 # N2O
-      - 1871.71051 # Frezon
+      - 18717.1051 # Frezon
       temperature: 293.15
   - type: Destructible
     thresholds:
@@ -806,8 +806,8 @@
     - type: PhysicalComposition
       materialComposition:
         Steel: 500
-    - type: StaticPrice
-      price: 60 # Frontier: 125<60 - TODO: material value rework
+    - type: StaticPrice # HL: Price balancing
+      price: 125
 
 - type: entity
   parent: GasCanisterBrokenBase

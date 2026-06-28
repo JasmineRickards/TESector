@@ -7,13 +7,16 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Damage.Components;
 using Content.Shared.GameTicking;
-using Content.Shared.Hands.Components;
+using Content.Shared.Hands.Components; // Hardlight
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Mobs; // Hardlight
 using Content.Shared.Movement.Systems; // HardLight
 using Content.Shared.Players;
 using Content.Shared.Preferences; // HardLight
 using Content.Shared.Roles;
+using Content.Shared.Tag; // Hardlight
 using Content.Shared.Traits;
 using Content.Shared.Whitelist;
 using Robust.Server.Player;
@@ -41,6 +44,7 @@ public sealed class TraitSystem : EntitySystem
     [Dependency] private readonly SharedHandsSystem _sharedHandsSystem = default!;
     [Dependency] private readonly EntityWhitelistSystem _whitelistSystem = default!;
     [Dependency] private readonly MovementSpeedModifierSystem _movementSpeed = default!; // HardLight
+    [Dependency] private readonly TagSystem _tagSystem = default!; // Hardlight
 
     public override void Initialize()
     {
@@ -84,7 +88,24 @@ public sealed class TraitSystem : EntitySystem
             // Check requirements if they exist
             if (traitPrototype.Requirements.Count > 0)
             {
-                var job = _prototype.Index<JobPrototype>(args.JobId ?? _prototype.EnumeratePrototypes<JobPrototype>().First().ID);
+                // VRS: guard against missing/unset job to avoid InvalidOperationException from First() when no job prototypes are loaded.
+                // The original `job` local was unused; we only need to confirm a job is resolvable so requirement checks downstream remain meaningful.
+                var hasJob = args.JobId is { } jobId && _prototype.HasIndex<JobPrototype>(jobId);
+                if (!hasJob)
+                {
+                    var any = false;
+                    foreach (var _ in _prototype.EnumeratePrototypes<JobPrototype>())
+                    {
+                        any = true;
+                        break;
+                    }
+                    if (!any)
+                    {
+                        DebugTools.Assert("TraitSystem: no JobPrototype available to evaluate trait requirements.");
+                        continue;
+                    }
+                }
+
                 var playTimes = _playTimeTracking.GetTrackerTimes(args.Player);
 
                 var requirementsMet = true;
@@ -117,7 +138,7 @@ public sealed class TraitSystem : EntitySystem
     /// This is intended for non-standard spawn paths like admin spawning or cloning
     /// that already have a validated profile and just need its trait components replayed.
     /// </summary>
-    public void ApplyProfileTraits(EntityUid uid, HumanoidCharacterProfile profile, string? playerName = null, bool addTraitGear = true)
+    public void ApplyProfileTraits(EntityUid uid, HumanoidCharacterProfile profile, string? playerName = null, bool addTraitGear = true, bool ignoreEntityRestrictions = false)
     {
         var sortedTraits = new List<TraitPrototype>();
         foreach (var traitId in profile.TraitPreferences)
@@ -136,42 +157,57 @@ public sealed class TraitSystem : EntitySystem
                 continue;
             }
 
-            AddTrait(uid, traitPrototype, addTraitGear);
+            AddTrait(uid, traitPrototype, addTraitGear, ignoreEntityRestrictions);
         }
     }
 
     /// <summary>
     ///     Adds a single Trait Prototype to an Entity.
     /// </summary>
-    public void AddTrait(EntityUid uid, TraitPrototype traitPrototype, bool addTraitGear = true) // HardLight: Added bool addTraitGear
+    public void AddTrait(EntityUid uid, TraitPrototype traitPrototype, bool addTraitGear = true, bool ignoreEntityRestrictions = false) // HardLight: Added bool addTraitGear
     {
-        // Check whitelist/blacklist
-        if (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, uid) ||
-            _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, uid))
+        // Character-override bodies can intentionally differ from the validated profile body.
+        // In that case we need to preserve the selected traits instead of re-filtering them.
+        if (!ignoreEntityRestrictions &&
+            (_whitelistSystem.IsWhitelistFail(traitPrototype.Whitelist, uid) ||
+             _whitelistSystem.IsBlacklistPass(traitPrototype.Blacklist, uid)))
             return;
 
         // Add all components required by the prototype
-        EntityManager.AddComponents(uid, traitPrototype.Components, traitPrototype.ReplaceComponents); // Hardlight: Added ReplaceComponents
+        // Hardlight start - Add ReplaceComponents
+        var components = traitPrototype.Components;
+        var tagEntry = components.FirstOrDefault(kv => kv.Value.Component is TagComponent);
+        if (tagEntry.Value is { } tagEntryValue && tagEntryValue.Component is TagComponent tagEntryComp &&
+            EntityManager.TryGetComponent<TagComponent>(uid, out var existingTags))
+        {
+            _tagSystem.AddTags(uid, tagEntryComp.Tags);
+            components = new ComponentRegistry(components.Where(kv => kv.Key != tagEntry.Key).ToDictionary(kv => kv.Key, kv => kv.Value));
+        }
 
-            // Starlight start
-            var language = EntityManager.System<LanguageSystem>();
+        components = StackPassiveDamage(uid, components);
 
-            if (traitPrototype.RemoveLanguagesSpoken is not null)
-                foreach (var lang in traitPrototype.RemoveLanguagesSpoken)
-                    language.RemoveLanguage(uid, lang, true, false); // HardLight: args.Mob<uid
+        EntityManager.AddComponents(uid, components, traitPrototype.ReplaceComponents);
+        // Hardlight end
 
-            if (traitPrototype.RemoveLanguagesUnderstood is not null)
-                foreach (var lang in traitPrototype.RemoveLanguagesUnderstood)
-                    language.RemoveLanguage(uid, lang, false, true); // HardLight: args.Mob<uid
+        // Starlight start
+        var language = EntityManager.System<LanguageSystem>();
 
-            if (traitPrototype.LanguagesSpoken is not null)
-                foreach (var lang in traitPrototype.LanguagesSpoken)
-                    language.AddLanguage(uid, lang, true, false); // HardLight: args.Mob<uid
+        if (traitPrototype.RemoveLanguagesSpoken is not null)
+            foreach (var lang in traitPrototype.RemoveLanguagesSpoken)
+                language.RemoveLanguage(uid, lang, true, false); // HardLight: args.Mob<uid
 
-            if (traitPrototype.LanguagesUnderstood is not null)
-                foreach (var lang in traitPrototype.LanguagesUnderstood)
-                    language.AddLanguage(uid, lang, false, true); // HardLight: args.Mob<uid
-            // Starlight end
+        if (traitPrototype.RemoveLanguagesUnderstood is not null)
+            foreach (var lang in traitPrototype.RemoveLanguagesUnderstood)
+                language.RemoveLanguage(uid, lang, false, true); // HardLight: args.Mob<uid
+
+        if (traitPrototype.LanguagesSpoken is not null)
+            foreach (var lang in traitPrototype.LanguagesSpoken)
+                language.AddLanguage(uid, lang, true, false); // HardLight: args.Mob<uid
+
+        if (traitPrototype.LanguagesUnderstood is not null)
+            foreach (var lang in traitPrototype.LanguagesUnderstood)
+                language.AddLanguage(uid, lang, false, true); // HardLight: args.Mob<uid
+        // Starlight end
 
         // HardLight: Force an immediate refresh so movement penalties/bonuses apply on spawn.
         _movementSpeed.RefreshMovementSpeedModifiers(uid);
@@ -186,6 +222,32 @@ public sealed class TraitSystem : EntitySystem
                 checkActionBlocker: false,
                 handsComp: handsComponent);
         }
+    }
+
+    /// <summary>
+    /// HardLight: If an entity has multiple traits that apply passive damage, we want to stack them instead of overwriting the component and losing the previous trait's damage.
+    /// </summary>
+    private ComponentRegistry StackPassiveDamage(EntityUid uid, ComponentRegistry components)
+    {
+        var componentName = EntityManager.ComponentFactory.GetComponentName<PassiveDamageComponent>();
+
+        if (!components.TryGetValue(componentName, out var incomingEntry) ||
+            incomingEntry.Component is not PassiveDamageComponent incoming ||
+            !TryComp<PassiveDamageComponent>(uid, out var existing))
+        {
+            return components;
+        }
+
+        existing.Stacks.Add(new PassiveDamageStackEntry
+        {
+            AllowedStates = new List<MobState>(incoming.AllowedStates),
+            Damage = new(incoming.Damage),
+            Interval = incoming.Interval,
+            DamageCap = incoming.DamageCap,
+        });
+
+        Dirty(uid, existing);
+        return new ComponentRegistry(components.Where(kv => kv.Key != componentName).ToDictionary(kv => kv.Key, kv => kv.Value));
     }
 
     /// <summary>

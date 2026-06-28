@@ -1,0 +1,41 @@
+- type: trait
+  id: DogVisionNoBypass
+  name: trait-deuteranopia-nobypass-name
+  description: trait-deuteranopia-nobypass-desc
+  category: Physical
+  cost: -2
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#    - UltraVisionNoBypass
+#    - UltraVision
+#    - DogVision
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - UltraVisionNoBypass
+      - UltraVision
+      - DogVision
+  # End TE - trait selection UI has been remade
+  components:
+    - type: DogVisionNoBypass
+
+- type: trait
+  id: UltraVisionNoBypass
+  name: trait-ultravision-nobypass-name
+  description: trait-ultravision-nobypass-desc
+  category: Physical
+  cost: -2
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#    - DogVisionNoBypass
+#    - UltraVision
+#    - DogVision
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - DogVisionNoBypass
+      - UltraVision
+      - DogVision
+  # End TE - trait selection UI has been remade
+  components:
+    - type: UltraVisionNoBypass

@@ -30,4 +30,16 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<string> OocDiscordChannelId =
         CVarDef.Create("ooc.discord_channel_id", string.Empty, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     Whether OOC slow mode is enabled, restricting how often players can send OOC messages.
+    /// </summary>
+    public static readonly CVarDef<bool> OocSlowModeEnabled =
+        CVarDef.Create("ooc.slow_mode_enabled", false, CVar.NOTIFY | CVar.SERVER);
+
+    /// <summary>
+    ///     The minimum number of seconds a player must wait between OOC messages when slow mode is active.
+    /// </summary>
+    public static readonly CVarDef<float> OocSlowModeInterval =
+        CVarDef.Create("ooc.slow_mode_interval", 60f, CVar.SERVER);
 }

@@ -15,7 +15,7 @@
   id: AbilityAphrodesiacBite
   name: trait-aphrodesiacbite-name
   description: trait-aphrodesiacbite-desc
-  category: Physical
+  category: Lewd
 # Start TE - remake trait selection UI
 #  mutuallyExclusiveTraits:
 #  - AbilityPhilterexBite
@@ -34,7 +34,7 @@
   id: AbilityPhilterexBite
   name: trait-philterexbite-name
   description: trait-philterexbite-desc
-  category: Physical
+  category: Lewd
   # Start TE - remake trait selection UI
 #  mutuallyExclusiveTraits:
 #  - AbilityAphrodesiacBite
@@ -55,7 +55,7 @@
   id: AbilityPomelustineBite
   name: trait-pomelustinebite-name
   description: trait-pomelustinebite-desc
-  category: Physical
+  category: Lewd
   # Start TE - remake trait selection UI
 #  mutuallyExclusiveTraits:
 #  - AbilityAphrodesiacBite

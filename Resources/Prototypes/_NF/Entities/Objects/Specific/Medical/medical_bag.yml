@@ -21,8 +21,9 @@
     areaInsert: true
     whitelist:
       components:
-        - Pill
+        - Injector
       tags:
+        - Pill
         - Hypospray
         - PillCanister
         - CentrifugeCompatible

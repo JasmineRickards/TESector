@@ -37,6 +37,8 @@
     selectedMode: SemiAuto
     availableModes:
     - SemiAuto
+    fireRate: 3
+    projectileSpeed: 40
     soundGunshot:
       path: /Audio/_RMC14/Weapons/Guns/Gunshots/gun_m4spr.ogg
   # - type: GunUserWhitelist
@@ -230,7 +232,7 @@
   - type: Projectile
     damage:
       types:
-        Piercing: 45
+        Piercing: 30
   # - type: CMArmorPiercing
     # amount: 35
   # - type: RMCProjectileAccuracy

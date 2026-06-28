@@ -3,7 +3,19 @@
   name: trait-ultravision-name
   description: trait-ultravision-desc
   category: Physical
-  cost: -2
+  cost: 0
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#    - DogVision
+#    - DogVisionNoBypass
+#    - UltraVisionNoBypass
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - DogVision
+      - DogVisionNoBypass
+      - UltraVisionNoBypass
+  # End TE - trait selection UI has been remade
   components:
     - type: UltraVision
 
@@ -12,6 +24,18 @@
   name: trait-deuteranopia-name
   description: trait-deuteranopia-desc
   category: Physical
-  cost: -2
+  cost: 0
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#    - UltraVision
+#    - UltraVisionNoBypass
+#    - DogVisionNoBypass
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - UltraVision
+      - UltraVisionNoBypass
+      - DogVisionNoBypass
+  # End TE - trait selection UI has been remade
   components:
     - type: DogVision
