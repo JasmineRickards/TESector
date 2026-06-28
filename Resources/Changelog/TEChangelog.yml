@@ -123,3 +123,258 @@ Entries:
         one-sidedly excluded by dark regeneration traits.
   id: 14
   time: '2026-06-27T10:51:08.0000000+00:00'
+- author: ported by evil-serenity
+  changes:
+    - type: Add
+      message: Directional ship spawn alerts
+    - type: Tweak
+      message: Ships can no longer be saved whilst a player is aboard them
+    - type: Add
+      message: Radio channel filter can now be set in the chat filter menu!
+    - type: Add
+      message: Research console now has new tech tree visuals, instead of gambling!
+    - type: Add
+      message: Landgrab planet-claiming/outpost systems (stated to be WIP/unfinished)
+    - type: Add
+      message: >-
+        Shuttle/nav UI now has azimuth scales/rings, compass overlay, radar mode
+        controls among other things!
+    - type: Fix
+      message: >-
+        Fixed mind/job transfer edge cases for AI/borg shunting and station pay
+        scheduling across body transfers.
+    - type: Fix
+      message: Anaconda is now self recharging, as it was supposed to.
+    - type: Add
+      message: Leaky traits...
+    - type: Tweak
+      message: Skates are now 40% faster! Time to hit more walls!
+    - type: Fix
+      message: Station Hosts are now given a skirt option.
+    - type: Fix
+      message: Station Hosts can now bring other kinds of shoes.
+    - type: Add
+      message: High heels are now available in loadouts!
+    - type: Tweak
+      message: Cosmetic loadout options no longer require playtime.
+    - type: Add
+      message: >-
+        New Red Regalia gloves are now one of the loadout options to complete
+        the rest of the set.
+    - type: Add
+      message: Cat paws! Insulated variants are included.
+    - type: Add
+      message: Bunnysuit boxes are now selectable at roundstart.
+    - type: Add
+      message: You can now bring a maid outfit to work.
+    - type: Add
+      message: Cat, dog, and bunny ears have been added to loadouts!
+    - type: Tweak
+      message: Freelancers are no longer required to bring a backpack.
+    - type: Tweak
+      message: >-
+        The Captain, Head of Security, and Warden is no longer required to bring
+        armour.
+    - type: Tweak
+      message: You are no longer required to bring shoes.
+    - type: Tweak
+      message: Security Officers are no longer required to bring a belt or armour.
+    - type: Add
+      message: Many ClothesMate-only items are now in loadouts (too many to list here).
+    - type: Add
+      message: Geneticists now get the full range of loadout options.
+    - type: Tweak
+      message: White gloves now cost 600 instead of 2k.
+    - type: Add
+      message: Mantises are now allowed to bring alternative clothing to work.
+    - type: Add
+      message: You can now chameleon helmets into moffroaches.
+    - type: Add
+      message: Painkillers!
+    - type: Add
+      message: Pacifists can now throw things without hurting people.
+    - type: Add
+      message: >-
+        CC has maps, beacons, bluespace flashers, borg rechargers and cameras
+        now!
+    - type: Add
+      message: Bathrooms, Sauna, Brig, Briefing room, and more to CC!
+    - type: Fix
+      message: >-
+        Fixed some actions in the right-click menu on a player showing up with a
+        delay.
+    - type: Add
+      message: >-
+        Resomi now have new noises for coughing, yawning, sighing and gasping.
+        No more weird hooman noises!
+    - type: Fix
+      message: Resomi can now sound like sad little birds when they die. Less exciting.
+    - type: Fix
+      message: Breaching Hammer can now be used to pry.
+    - type: Fix
+      message: Fixed the options to weave and spin with the Bionic Spinarette trait.
+    - type: Fix
+      message: AI Cores can now pilot ships.
+    - type: Add
+      message: >-
+        AI Shunt Receiver can be used to give your personal shuttle AI cyborg
+        bodies to use!
+    - type: Fix
+      message: Paramedic windbreaker is now unzippable.
+    - type: Fix
+      message: >-
+        Security holoprojector barrier now has a blue pointlight to match its
+        new colors.
+    - type: Fix
+      message: >-
+        Dynamoxine medpen from the sec vendor now has correct in hand sprite and
+        is no longer a large ERROR.
+    - type: Fix
+      message: A few moth foods now have valid recipes!
+    - type: Fix
+      message: Plumbing Filters now work.
+    - type: Add
+      message: >-
+        Cybersun corporate jumpsuit and Cybersun R&D cloak can now be worn by
+        Cybernsun enjoyers!
+    - type: Tweak
+      message: Syndicate expedition npcs no longer death rattle alert.
+    - type: Tweak
+      message: Adjusted the tintreach's blunt damage from 65 -> 30, a 54% reduction.
+    - type: Tweak
+      message: >-
+        Adjusted the tintreach's structural damage from 300 -> 200 when wielded,
+        a 33% reduction.
+    - type: Tweak
+      message: Cyborgs now spawn with PDAs and Cyborg IDs.
+    - type: Tweak
+      message: >-
+        Station AI's name changes to character name if positronic brain is
+        inserted during construction.
+    - type: Add
+      message: Scandinavian accent can now be selected.
+    - type: Add
+      message: >-
+        Efflumetonial, a new reagent that cures addictine, but cannot exist
+        outside someone's bloodstream, can now be made.
+    - type: Add
+      message: Chemicals that spoil have a new dropdown in their guidebook entry!
+    - type: Add
+      message: Some mobs now have the spark of hatred >:3
+    - type: Add
+      message: There are a lot more bluespace storage options now!
+    - type: Add
+      message: Tradeband language can now be spoken.
+    - type: Add
+      message: >-
+        You can now get addressed telepathy psionic power, which lets you see
+        names of those who are talking over telepathy.
+    - type: Tweak
+      message: Mantis now starts with the addressed telepathy psionic power.
+    - type: Fix
+      message: >-
+        Light sensitivity traits no longer burn you in light levels they
+        shouldn't.
+    - type: Add
+      message: >-
+        Audible Ping for when you receive chat highlights! (You can toggle it
+        on/off in Accessibility settings or adjust the volume in Audio
+        settings.)
+    - type: Add
+      message: >-
+        Now you can press new undock all button, so you no longer have to
+        iterate through all of your docks manually!
+    - type: Add
+      message: >-
+        Arachnophobia mode! No longer will you have to see the spiders if you
+        don't want to.
+    - type: Add
+      message: >-
+        Added the ability to give custom names to NSFW markings, among a few
+        other customisable options!
+    - type: Fix
+      message: >-
+        Balanced item prices so you can't get infinite money from buying/selling
+        anymore.
+    - type: Add
+      message: 4 new voice pitch traits can now be selected!
+    - type: Fix
+      message: Changed the limiter on asteroid spawns, space feels populated now.
+    - type: Fix
+      message: Amoxla returns blood of Avali and Resomi as it was supposed to.
+    - type: Fix
+      message: >-
+        Harpies will now be correctly poisoned by allicin and theobromine, and
+        breathe twice as fast compared to humans.
+    - type: Fix
+      message: >-
+        Felionoid will now go into crit at 85 and receive a speed boost when not
+        wearing shoes, alongside silent footsteps as they were meant to.
+    - type: Remove
+      message: Felionoids can no longer drag with their tails.
+    - type: Fix
+      message: Neuralyzers save added compulsions correctly once again.
+    - type: Fix
+      message: Psychologists are now allowed to bring other shoes to work.
+    - type: Tweak
+      message: You can now lay eggs whilst interaction blocked (e.g handcuffed).
+    - type: Fix
+      message: >-
+        Jet injectors are no longer pull their max inject amount all the time,
+        now they always pull 5u at a time instead.
+    - type: Remove
+      message: >-
+        Lone Digger by Caravan Palace is no longer in the jukeboxes due to
+        copyright reason.
+    - type: Fix
+      message: Church bells no longer put blank messages in chat.
+    - type: Add
+      message: Protogens now have robotic versions of almost every emote in the game!
+    - type: Add
+      message: Diona, Vox and Vulpkanins now have unique sneeze sounds.
+    - type: Fix
+      message: Smile the slime can be taken as a ghost role once again.
+    - type: Fix
+      message: Some ships no longer throw errors or crashing the server when spawned.
+    - type: Tweak
+      message: >-
+        Updated ship prices so they cost more to buy than sell. No more infinite
+        money glitch.
+    - type: Add
+      message: Spectral locators is now one of backpack item loadout options.
+    - type: Add
+      message: >-
+        You can now have multiple instances of passive damage / passive
+        regeneration.
+    - type: Add
+      message: Slow ooc admin command.
+    - type: Fix
+      message: >-
+        Admin logs now have their timezone displayed in local time rather than
+        UTC.
+    - type: Tweak
+      message: >-
+        "Respawn" admin action has been renamed to "return to lobby." Similar
+        related actions have had tooltips added to clarify behavior.
+    - type: Remove
+      message: >-
+        The obsolete buttons to Teleport and kick (Player Actions Panel) have
+        been removed from the first tab of the admin menu.
+    - type: Add
+      message: >-
+        You can now see the contraband and chameleon status of items in the
+        examine menu.
+    - type: Add
+      message: Silicon laws are now admin logged in "SiliconLaw" category in adminlogs.
+    - type: Fix
+      message: Admin panel now groups like types when sorting on 'Role Type' column.
+    - type: Fix
+      message: The admin player and object tabs now have a better visual style.
+    - type: Tweak
+      message: The 'Delete' button in the objects tab is now a confirm button.
+    - type: Fix
+      message: >-
+        Fixed the 'Teleport' button in the objects tab not working for stations
+        and maps.
+  id: 15
+  time: '2026-06-28T12:20:20.0000000+00:00'
