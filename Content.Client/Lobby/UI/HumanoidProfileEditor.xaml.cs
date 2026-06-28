@@ -690,7 +690,7 @@ namespace Content.Client.Lobby.UI
 
                 selector.PreferenceChanged += preference =>
                 {
-                    if (preference && categoriesPoints[category] + trait.Cost <= category.MaxTraitPoints)
+                    if (preference && (category.MaxTraitPoints == 0 || category.MaxTraitPoints == null || categoriesPoints[category] + trait.Cost <= category.MaxTraitPoints))
                     {
                         var oldProfile = Profile;
                         Profile = Profile?.WithTraitPreference(trait.ID, _prototypeManager);
