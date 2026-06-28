@@ -195,10 +195,18 @@
   description: trait-low-voice-desc
   category: SpeechTraits
   cost: 0
-  mutuallyExclusiveTraits:
-  - LowestVoice
-  - HighVoice
-  - HighestVoice
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - LowestVoice
+#  - HighVoice
+#  - HighestVoice
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LowestVoice
+      - HighVoice
+      - HighestVoice
+  # End TE - trait selection UI has been remade
   components:
   - type: EmotePitch
     semitones: -4
@@ -209,10 +217,18 @@
   description: trait-lowest-voice-desc
   category: SpeechTraits
   cost: 0
-  mutuallyExclusiveTraits:
-  - LowVoice
-  - HighVoice
-  - HighestVoice
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - LowVoice
+#  - HighVoice
+#  - HighestVoice
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LowVoice
+      - HighVoice
+      - HighestVoice
+  # End TE - trait selection UI has been remade
   components:
   - type: EmotePitch
     semitones: -9
@@ -223,10 +239,18 @@
   description: trait-high-voice-desc
   category: SpeechTraits
   cost: 0
-  mutuallyExclusiveTraits:
-  - LowVoice
-  - LowestVoice
-  - HighestVoice
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - LowVoice
+#  - LowestVoice
+#  - HighestVoice
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LowVoice
+      - LowestVoice
+      - HighestVoice
+  # End TE - trait selection UI has been remade
   components:
   - type: EmotePitch
     semitones: 4
@@ -237,10 +261,18 @@
   description: trait-highest-voice-desc
   category: SpeechTraits
   cost: 0
-  mutuallyExclusiveTraits:
-  - LowVoice
-  - LowestVoice
-  - HighVoice
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - LowVoice
+#  - LowestVoice
+#  - HighVoice
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - LowVoice
+      - LowestVoice
+      - HighVoice
+  # End TE - trait selection UI has been remade
   components:
   - type: EmotePitch
     semitones: 9

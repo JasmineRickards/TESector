@@ -109,10 +109,18 @@
   name: hl-trait-natural-lubricant-name
   description: hl-trait-natural-lubricant-desc
   category: Lewd
-  mutuallyExclusiveTraits:
-  - NaturalLubricantHeavy
-  - NaturalLubricantExcessive
-  - NaturalLubricantOverflowing
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - NaturalLubricantHeavy
+#  - NaturalLubricantExcessive
+#  - NaturalLubricantOverflowing
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - NaturalLubricantHeavy
+      - NaturalLubricantExcessive
+      - NaturalLubricantOverflowing
+  # End TE - trait selection UI has been remade
   components:
     - type: NaturalLubricantProducer
       volume: 1
@@ -122,10 +130,18 @@
   name: hl-trait-natural-lubricant-heavy-name
   description: hl-trait-natural-lubricant-heavy-desc
   category: Lewd
-  mutuallyExclusiveTraits:
-  - NaturalLubricantProducer
-  - NaturalLubricantExcessive
-  - NaturalLubricantOverflowing
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - NaturalLubricantProducer
+#  - NaturalLubricantExcessive
+#  - NaturalLubricantOverflowing
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - NaturalLubricantProducer
+      - NaturalLubricantExcessive
+      - NaturalLubricantOverflowing
+  # End TE - trait selection UI has been remade
   components:
     - type: NaturalLubricantProducer
       volume: 3
@@ -135,10 +151,18 @@
   name: hl-trait-natural-lubricant-excessive-name
   description: hl-trait-natural-lubricant-excessive-desc
   category: Lewd
-  mutuallyExclusiveTraits:
-  - NaturalLubricantProducer
-  - NaturalLubricantHeavy
-  - NaturalLubricantOverflowing
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - NaturalLubricantProducer
+#  - NaturalLubricantHeavy
+#  - NaturalLubricantOverflowing
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - NaturalLubricantProducer
+      - NaturalLubricantHeavy
+      - NaturalLubricantOverflowing
+  # End TE - trait selection UI has been remade
   components:
     - type: NaturalLubricantProducer
       volume: 5
@@ -148,10 +172,18 @@
   name: hl-trait-natural-lubricant-overflowing-name
   description: hl-trait-natural-lubricant-overflowing-desc
   category: Lewd
-  mutuallyExclusiveTraits:
-  - NaturalLubricantProducer
-  - NaturalLubricantHeavy
-  - NaturalLubricantExcessive
+  # Start TE - trait selection UI has been remade
+#  mutuallyExclusiveTraits:
+#  - NaturalLubricantProducer
+#  - NaturalLubricantHeavy
+#  - NaturalLubricantExcessive
+  requirements:
+  - !type:TraitsRequirement
+    excludedTraits:
+      - NaturalLubricantProducer
+      - NaturalLubricantHeavy
+      - NaturalLubricantExcessive
+  # End TE - trait selection UI has been remade
   components:
     - type: NaturalLubricantProducer
       volume: 10
