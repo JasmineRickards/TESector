@@ -19,7 +19,7 @@ namespace Content.Client.Changelog
         [Dependency] private readonly IConfigurationManager _configManager = default!;
 
         private const string SawmillName = "changelog";
-        public const string MainChangelogName = "HardlightChangelog";
+        public const string MainChangelogName = "TEChangelog";
 
         private ISawmill _sawmill = default!;
 
