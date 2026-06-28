@@ -147,10 +147,10 @@
 #      partType: Leg
 #      symmetry: Left
     - type: MovementBodyPart
-      sprintSpeed : 5.625
+      sprintSpeed : 4.9
 #      maxDensity: 55
     - type: MovementBodyPartHinderedByShoes
-      hinderModifier: 0.08
+      hinderModifier: 0.01
 
 - type: entity
   id: RightLegFelionoid
@@ -167,10 +167,10 @@
 #      partType: Leg
 #      symmetry: Right
     - type: MovementBodyPart
-      sprintSpeed : 5.625
+      sprintSpeed : 4.9
 #      maxDensity: 55
     - type: MovementBodyPartHinderedByShoes
-      hinderModifier: 0.08
+      hinderModifier: 0.01
 
 - type: entity
   id: LeftFootFelionoid
