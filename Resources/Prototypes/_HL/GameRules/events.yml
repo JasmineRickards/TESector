@@ -90,7 +90,7 @@
     - id: LizardVents
     - id: WawaVents
     - id: IrradiatedPests
-    - id: glimmervents
+#    - id: glimmervents # TE: Glimmer mites don't have any use yet, since normality crystals have not been ported.
     # - id: GiftsEngineering
     # - id: GiftsFireProtection
     # - id: GiftsJanitor
