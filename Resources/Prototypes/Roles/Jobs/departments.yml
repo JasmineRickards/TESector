@@ -149,6 +149,9 @@
    - Mime
    - Musician
    - Visitor
+   - Contractor
+   - Mercenary
+   - Pilot
 
 - type: department
   id: Specific
