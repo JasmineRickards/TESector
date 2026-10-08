@@ -67,12 +67,12 @@
     price: 5000
     vendPrice: 42300
 - type: entity
-  name: KS-23
+  name: KS-46
   parent:
   - BaseWeaponShotgun
   - BaseGunWieldable
   id: WeaponShotgunBigBuddy
-  description: A massive 4 gauge (23x75mm) shotgun made from "defective" anti-air cannons.
+  description: A massive 23x75mm shotgun made from "defective" anti-air cannons and hope to not break your shoulder firering it.
   components:
   - type: Item
     size: Normal
