@@ -72,7 +72,7 @@
   - BaseWeaponShotgun
   - BaseGunWieldable
   id: WeaponShotgunBigBuddy
-  description: A massive 23x75mm shotgun made from "defective" anti-air cannons and hope to not break your shoulder firering it.
+  description: A massive 23x75mm shotgun made from "defective" anti-air cannons and hope to not break your shoulder firing  it.
   components:
   - type: Item
     size: Normal
