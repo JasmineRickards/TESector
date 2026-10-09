@@ -1,0 +1,26 @@
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitOmon
+  name: OMON Uniform
+  description: An uniform made for the Russian Ministry of Internal Defence originaly...
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _Civ14/Clothing/Uniforms/Jumpsuit/omon.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Civ14/Clothing/Uniforms/Jumpsuit/omon.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitParamedicRu
+  name: Paramedic Uniform
+  description: Altenative Paramedical uniform.
+  components:
+  - type: Sprite
+    netsync: false
+    sprite: _Civ14/Clothing/Uniforms/Jumpsuit/paramedic.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Civ14/Clothing/Uniforms/Jumpsuit/paramedic.rsi
